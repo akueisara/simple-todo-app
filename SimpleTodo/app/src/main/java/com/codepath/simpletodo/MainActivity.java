@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> itemsAdapter;
     ListView lvItems;
     private final int REQUEST_CODE = 20;
+    private TodoItemDatabase mDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         lvItems = (ListView) findViewById(R.id.lvItems);
         items = new ArrayList<String>();
-        readItems();
+//        readItems();
+        readItemsFromDB();
         itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
         lvItems.setAdapter(itemsAdapter);
 //        items.add("First Item");
@@ -43,9 +45,11 @@ public class MainActivity extends AppCompatActivity {
         EditText etNewItem = (EditText) findViewById(R.id.btnAddItem);
         String itemText = etNewItem.getText().toString();
         if (!"".equals(itemText)) {
-            itemsAdapter.add(itemText);
+            items.add(itemText);
+            itemsAdapter.notifyDataSetChanged();
             etNewItem.setText("");
-            writeItems();
+//            writeItems();
+            writeItemsToDB();
         }
         else {
             Context context = getApplicationContext();
@@ -63,7 +67,8 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onItemLongClick(AdapterView<?> adapter, View item, int pos, long id) {
                         items.remove(pos);
                         itemsAdapter.notifyDataSetChanged();
-                        writeItems();
+//                        writeItems();
+                        writeItemsToDB();
                         return true;
                     }
                 });
@@ -72,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick (AdapterView < ? > adapter, View view, int pos, long arg){
                     Intent intent = new Intent(MainActivity.this, EditItemActivity.class);
-
                     intent.putExtra("text",items.get(pos).toString());
                     intent.putExtra("pos",pos);
                     startActivityForResult(intent,REQUEST_CODE);
@@ -89,11 +93,12 @@ public class MainActivity extends AppCompatActivity {
             int pos = data.getExtras().getInt("pos", 0);
             items.set(pos, itemName);
             itemsAdapter.notifyDataSetChanged();
-            writeItems();
+//            writeItems();
+            writeItemsToDB();
         }
     }
 
-    public void readItems() {
+    private void readItems() {
         File filesDir = getFilesDir();
         File todoFile = new File(filesDir, "todo.txt");
         try {
@@ -111,5 +116,15 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
            e.printStackTrace();
         }
+    }
+
+    private void readItemsFromDB() {
+        mDbHelper = TodoItemDatabase.getInstance(this);
+        items = mDbHelper.getAllItems();
+    }
+
+    private void writeItemsToDB() {
+        mDbHelper = TodoItemDatabase.getInstance(this);
+        mDbHelper.addItems(items);
     }
 }

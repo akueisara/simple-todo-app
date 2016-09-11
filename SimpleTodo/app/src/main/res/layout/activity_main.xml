@@ -26,7 +26,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:dividerHeight="0dp" />
+        android:dividerHeight="0dp"
+        android:layout_above="@+id/btnAddItem" />
 
     <EditText
         android:layout_width="wrap_content"
