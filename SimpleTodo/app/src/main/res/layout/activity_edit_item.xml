@@ -10,29 +10,105 @@
     tools:context="com.codepath.simpletodo.EditItemActivity">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit Item Below:"
-        android:id="@+id/textView"
         android:layout_marginTop="16dp"
+        android:text="Edit Item Below:"
+        android:textColor="@android:color/black"
         android:textSize="21sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"/>
+        android:textStyle="bold" />
 
-    <EditText
-        android:layout_width="250dp"
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editItem"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/textView"
         android:layout_marginTop="10dp"
-        android:backgroundTint="@android:color/holo_blue_dark"/>
+        android:text="Item Title"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 
-    <Button
+    <EditText
+        android:id="@+id/itemTitleEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleTextView"
+        android:textSize="20sp"
+        android:layout_marginLeft="6dp" />
+
+    <TextView
+        android:id="@+id/bodyTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/itemTitleEditText"
+        android:layout_marginTop="10dp"
+        android:text="Descripition"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/itemBodyEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bodyTextView"
+        android:textSize="20sp"
+        android:layout_marginLeft="6dp"/>
+
+    <TextView
+        android:id="@+id/priorityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/itemBodyEditText"
+        android:layout_marginTop="10dp"
+        android:text="Priority"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <Spinner
+        android:id="@+id/priority_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/priorityTextView"
+        android:textSize="20sp"
+        android:layout_marginLeft="6dp"/>
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/priority_spinner"
+        android:layout_marginTop="10dp"
+        android:text="Due Date"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/editDateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dateTextView"
+        android:onClick="onDatePick"
+        android:layout_marginLeft="6dp"
+        android:text="SEP-15-2016"
+        android:textSize="20sp" />
+
+    <Button
         android:id="@+id/saveButton"
-        android:layout_below="@+id/editItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editDateTextView"
         android:layout_marginTop="16dp"
-        android:onClick="onSave"/>
+        android:onClick="onSave"
+        android:text="Save"
+        android:layout_centerHorizontal="true"/>
+
 </RelativeLayout>

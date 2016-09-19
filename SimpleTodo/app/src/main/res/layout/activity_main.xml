@@ -9,16 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.codepath.simpletodo.MainActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add"
-        android:id="@+id/button"
-        android:onClick="onAddItem"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,4 +29,14 @@
         android:layout_toLeftOf="@+id/button"
         android:layout_toStartOf="@+id/button"
         android:hint="Add a new item" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:id="@+id/button"
+        android:onClick="onAddItem"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

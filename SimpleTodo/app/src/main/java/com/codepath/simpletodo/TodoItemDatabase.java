@@ -1,16 +1,13 @@
 package com.codepath.simpletodo;
 
-import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Build;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by akueisara on 9/11/2016.
@@ -25,7 +22,10 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
 
     // todoList Table columns
     private static final String KEY_TODO_ID = "id";
-    private static final String KEY_TODO_ITEM = "item";
+    private static final String KEY_TODO_TITLE = "title";
+    private static final String KEY_TODO_BODY = "body";
+    private static final String KEY_TODO_PRIORITY = "priority";
+    private static final String KEY_TODO_DUE_DATE = "date";
 
     private static final String TAG = TodoItemDatabase.class.getName();
 
@@ -45,15 +45,24 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    // Called when the database connection is being configured.
+    // Configure database settings for things like foreign key support, write-ahead logging, etc.
+    @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.setForeignKeyConstraintsEnabled(true);
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TODO_TABLE = "CREATE TABLE " + TABLE_NAME +
                 "(" +
-                KEY_TODO_ID + " INTEGER PRIMARY KEY," + // Define a primary key
-                KEY_TODO_ITEM + " TEXT" +
+                KEY_TODO_ID + " INTEGER PRIMARY KEY, " + // Define a primary key
+                KEY_TODO_TITLE + " TEXT, " +
+                KEY_TODO_BODY + " TEXT, " +
+                KEY_TODO_PRIORITY + " INTEGER, " +
+                KEY_TODO_DUE_DATE + " TEXT" +
                 ")";
-
-        Log.d("CREATE_TODO_TABLE", CREATE_TODO_TABLE);
 
         db.execSQL(CREATE_TODO_TABLE);
     }
@@ -70,12 +79,11 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
         }
     }
 
-    public ArrayList<String> getAllItems() {
-        ArrayList<String> items = new ArrayList<String>();
+    public ArrayList<TodoItem> getAllItems() {
+        ArrayList<TodoItem> items = new ArrayList<TodoItem>();
 
         // SELECT * FROM todoList
-        String ITEMS_SELECT_QUERY =
-                String.format("SELECT * FROM %s", TABLE_NAME);
+        String ITEMS_SELECT_QUERY = "SELECT * FROM " + TABLE_NAME;
 
         // "getReadableDatabase()" and "getWriteableDatabase()" return the same object (except under low
         // disk space scenarios)
@@ -86,14 +94,17 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
             if (rows_num != 0) {
                 cursor.moveToFirst();
                 for (int i = 0; i < rows_num; i++) {
-                    String item = cursor.getString(cursor.getColumnIndex(KEY_TODO_ITEM));
+                    String title = cursor.getString(cursor.getColumnIndex(KEY_TODO_TITLE));
+                    String body = cursor.getString(cursor.getColumnIndex(KEY_TODO_BODY));
+                    int priority = cursor.getInt(cursor.getColumnIndex(KEY_TODO_PRIORITY));
+                    String dueDate = cursor.getString(cursor.getColumnIndex(KEY_TODO_DUE_DATE));
+                    TodoItem item = new TodoItem(title, body, priority, dueDate);
                     items.add(item);
-                    Log.d("item", item);
                     cursor.moveToNext();
                 }
             }
         } catch (Exception e) {
-            Log.d(TAG, "Error while trying to get posts from database");
+            Log.d(TAG, "Error while trying to get items from database");
         } finally {
             if (cursor != null && !cursor.isClosed()) {
                 cursor.close();
@@ -103,19 +114,22 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
     }
 
     // Insert a item in the database
-    public void addItems(ArrayList<String> items) {
+    public void addItems(ArrayList<TodoItem> items) {
         // The database connection is cached so it's not expensive to call getWriteableDatabase() multiple times.
         SQLiteDatabase db = getWritableDatabase();
 
         // It's a good idea to wrap our insert in a transaction. This helps with performance and ensures
         // consistency of the database.
         db.beginTransaction();
-        db.execSQL("delete from "+ TABLE_NAME);
-//        db.delete(TABLE_NAME, null, null);
+        //  db.execSQL("delete from "+ TABLE_NAME);
+        db.delete(TABLE_NAME, null, null);
         try {
             ContentValues values = new ContentValues();
-            for (String item : items) {
-                values.put(KEY_TODO_ITEM, item);
+            for (TodoItem item : items) {
+                values.put(KEY_TODO_TITLE, item.title);
+                values.put(KEY_TODO_BODY, item.body);
+                values.put(KEY_TODO_PRIORITY, item.priority);
+                values.put(KEY_TODO_DUE_DATE, item.dueDate);
                 db.insertOrThrow(TABLE_NAME, null, values);
             }
             db.setTransactionSuccessful();
@@ -124,5 +138,13 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
         } finally {
             db.endTransaction();
         }
+    }
+
+    public void clearDatabase(String TABLE_NAME) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        String clearDBQuery = "DROP TABLE " + TABLE_NAME;
+        db.execSQL(clearDBQuery);
+        db.endTransaction();
     }
 }
