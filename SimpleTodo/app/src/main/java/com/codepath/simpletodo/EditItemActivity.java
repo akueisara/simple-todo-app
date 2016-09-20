@@ -110,7 +110,7 @@ public class EditItemActivity extends AppCompatActivity implements EditDialogFra
         FragmentManager fm = getSupportFragmentManager();
         TextView tvDate = (TextView) findViewById(R.id.editDateTextView);
         EditDialogFragment editItemDialog = EditDialogFragment.newInstance(tvDate.getText().toString());
-        editItemDialog.show(fm, "fragment_edit_name");
+        editItemDialog.show(fm, "fragment_edit_date");
     }
 
     @Override

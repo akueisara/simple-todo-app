@@ -24,8 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Priority"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_marginTop="6dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginTop="3dp"
             android:layout_alignParentRight="true"
             />
 
@@ -34,9 +34,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="date"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_marginRight="18dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="3dp"
             android:layout_toLeftOf="@id/tvPriority"/>
 
 
@@ -47,7 +47,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_marginTop="8dp"
             android:layout_below="@id/tvTitle"
-            android:hint="Description"/>
+            android:hint="Click to edit description"/>
 
     </RelativeLayout>
 </LinearLayout>

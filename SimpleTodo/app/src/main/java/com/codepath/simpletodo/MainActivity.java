@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
     TodoAdapter adapter;
@@ -28,6 +32,36 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         populateItemsList();
         setupListViewListener();
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.sort_title) {
+            Collections.sort(todoItems, new TodoItemTitleComparator());
+            adapter.notifyDataSetChanged();
+            return true;
+        }
+        else if (item.getItemId() == R.id.sort_priority) {
+            Collections.sort(todoItems, new TodoItemDateComparator());
+            Collections.sort(todoItems, new TodoItemPriorityComparator());
+            adapter.notifyDataSetChanged();
+            return true;
+
+        } else if (item.getItemId() == R.id.sort_date) {
+            Collections.sort(todoItems, new TodoItemPriorityComparator());
+            Collections.sort(todoItems, new TodoItemDateComparator());
+            adapter.notifyDataSetChanged();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void populateItemsList() {
@@ -56,6 +90,11 @@ public class MainActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
             etNewItem.setText("");
             writeItemsToDB();
+            // Check if no view has focus:
+            if (view != null) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
         } else {
             Context context = getApplicationContext();
             CharSequence text = "Please enter a valid item name";
@@ -106,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
             writeItemsToDB();
         }
     }
+
 
     private void readItemsFromDB() {
         mDbHelper = TodoItemDatabase.getInstance(this);
