@@ -29,13 +29,14 @@ public class TodoAdapter extends ArrayAdapter<TodoItem> {
         // Lookup view for data population
         TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
         TextView tvBody = (TextView) convertView.findViewById(R.id.tvBody);
-        TextView tvPriority = (TextView) convertView.findViewById(R.id.tvPriority);
+//        TextView tvPriority = (TextView) convertView.findViewById(R.id.tvPriority);
         TextView tvDate = (TextView) convertView.findViewById(R.id.tvDate);
         // Populate the data into the template view using the data object
         tvTitle.setText(item.title);
+        tvTitle.setTextColor(setColor(item.priority));
         tvBody.setText(item.body);
-        tvPriority.setText(item.getPriority(item.priority));
-        tvPriority.setTextColor(setColor(item.priority));
+//        tvPriority.setText(item.getPriority(item.priority));
+//        tvPriority.setTextColor(setColor(item.priority));
         tvDate.setText(item.dueDate);
         // Return the completed view to render on screen
         return convertView;

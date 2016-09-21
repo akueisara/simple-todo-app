@@ -15,19 +15,19 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Item Title"
+        android:text="Title"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
-        <TextView
-            android:id="@+id/tvPriority"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Priority"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginTop="3dp"
-            android:layout_alignParentRight="true"
-            />
+        <!--<TextView-->
+            <!--android:id="@+id/tvPriority"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Priority"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:layout_marginTop="3dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--/>-->
 
         <TextView
             android:id="@+id/tvDate"
@@ -37,7 +37,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_marginRight="18dp"
             android:layout_marginTop="3dp"
-            android:layout_toLeftOf="@id/tvPriority"/>
+            android:layout_alignParentRight="true"/>
 
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="6dp"
             android:layout_below="@id/tvTitle"
             android:hint="Click to edit description"/>
 

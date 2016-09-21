@@ -3,18 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/addButton"
+        android:icon="@drawable/add_button"
+        android:title="Add item"
+        app:showAsAction="always"/>
+
+    <item
         android:id="@+id/sort_title"
-        android:title="Sort by title"
-        app:showAsAction="never" />
+        android:title="Sort by title" />
 
     <item
         android:id="@+id/sort_priority"
-        android:title="Sort by priority"
-        app:showAsAction="never" />
+        android:title="Sort by priority" />
 
     <item
         android:id="@+id/sort_date"
-        android:title="Sort by due date"
-        app:showAsAction="never" />
+        android:title="Sort by due date" />
 
 </menu>

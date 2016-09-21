@@ -2,6 +2,8 @@ package com.codepath.simpletodo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         populateItemsList();
         setupListViewListener();
     }
@@ -43,7 +46,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.sort_title) {
+        if(item.getItemId() == R.id.addButton) {
+            Intent intent = new Intent(MainActivity.this, AddItemActivity.class);
+            intent.putExtra("title", "");
+            intent.putExtra("body", "");
+            intent.putExtra("priority", 1);
+            intent.putExtra("date", getCurrentDateTime());
+            startActivityForResult(intent, REQUEST_CODE);
+        }
+        else if(item.getItemId() == R.id.sort_title) {
             Collections.sort(todoItems, new TodoItemTitleComparator());
             adapter.notifyDataSetChanged();
             return true;
@@ -76,33 +87,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void onAddItem(View view) {
-        EditText etNewItem = (EditText) findViewById(R.id.btnAddItem);
-        String itemText = etNewItem.getText().toString();
-
-        // get current date
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
-        String datetime = dateformat.format(c.getTime());
-
-        if (!"".equals(itemText)) {
-            todoItems.add(new TodoItem(itemText, "", 1, datetime));
-            adapter.notifyDataSetChanged();
-            etNewItem.setText("");
-            writeItemsToDB();
-            // Check if no view has focus:
-            if (view != null) {
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            }
-        } else {
-            Context context = getApplicationContext();
-            CharSequence text = "Please enter a valid item name";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-        }
-    }
+//    public void onAddItem(View view) {
+//        EditText etNewItem = (EditText) findViewById(R.id.btnAddItem);
+//        String itemText = etNewItem.getText().toString();
+//
+//        if (!"".equals(itemText)) {
+//            todoItems.add(new TodoItem(itemText, "", 1, getCurrentDateTime()));
+//            adapter.notifyDataSetChanged();
+//            etNewItem.setText("");
+//            writeItemsToDB();
+//            // Check if no view has focus:
+//            if (view != null) {
+//                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+//                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+//            }
+//        } else {
+//            Context context = getApplicationContext();
+//            CharSequence text = "Please enter a valid item name";
+//            int duration = Toast.LENGTH_SHORT;
+//            Toast toast = Toast.makeText(context, text, duration);
+//            toast.show();
+//        }
+//    }
 
     public void setupListViewListener() {
         lvItems.setOnItemLongClickListener(
@@ -134,13 +140,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // REQUEST_CODE is defined above
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-            // Extract name value from result extras
-            String itemTitle = data.getExtras().getString("itemTitle");
-            String itemBody = data.getExtras().getString("itemBody");
-            int itemPriority = data.getExtras().getInt("itemPriority");
-            String itemDate = data.getExtras().getString("itemDate");
-            int pos = data.getExtras().getInt("pos", 0);
-            todoItems.set(pos, new TodoItem(itemTitle, itemBody, itemPriority, itemDate));
+            if (data.hasExtra("itemTitle")) {
+                // Extract name value from result extras
+                String itemTitle = data.getExtras().getString("itemTitle");
+                String itemBody = data.getExtras().getString("itemBody");
+                int itemPriority = data.getExtras().getInt("itemPriority");
+                String itemDate = data.getExtras().getString("itemDate");
+                if (data.hasExtra("pos")) {
+                    int pos = data.getExtras().getInt("pos", 0);
+                    todoItems.set(pos, new TodoItem(itemTitle, itemBody, itemPriority, itemDate));
+                } else {
+                    todoItems.add(new TodoItem(itemTitle, itemBody, itemPriority, itemDate));
+                }
+            }
+            else {
+                int pos = data.getExtras().getInt("pos", 0);
+                todoItems.remove(pos);
+            }
             adapter.notifyDataSetChanged();
             writeItemsToDB();
         }
@@ -155,5 +171,13 @@ public class MainActivity extends AppCompatActivity {
     private void writeItemsToDB() {
         mDbHelper = TodoItemDatabase.getInstance(this);
         mDbHelper.addItems(todoItems);
+    }
+
+    private String getCurrentDateTime() {
+        // get current date
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
+        String datetime = dateformat.format(c.getTime());
+        return datetime;
     }
 }
