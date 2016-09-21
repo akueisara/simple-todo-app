@@ -139,12 +139,4 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
             db.endTransaction();
         }
     }
-
-    public void clearDatabase(String TABLE_NAME) {
-        SQLiteDatabase db = getWritableDatabase();
-        db.beginTransaction();
-        String clearDBQuery = "DROP TABLE " + TABLE_NAME;
-        db.execSQL(clearDBQuery);
-        db.endTransaction();
-    }
 }

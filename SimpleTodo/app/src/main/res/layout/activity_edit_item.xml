@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/titleTextView"
         android:textSize="20sp"
-        android:layout_marginLeft="6dp"
+        android:layout_marginLeft="@dimen/activity_margin_left"
         android:inputType="textCapSentences"/>
 
     <TextView
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/bodyTextView"
         android:textSize="20sp"
-        android:layout_marginLeft="6dp"
+        android:layout_marginLeft="@dimen/activity_margin_left"
         android:inputType="textCapSentences"/>
 
     <TextView
@@ -74,12 +74,12 @@
         android:textStyle="bold"/>
 
     <Spinner
-        android:id="@+id/priority_spinner"
+        android:id="@+id/prioritySpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/priorityTextView"
         android:textSize="20sp"
-        android:layout_marginLeft="6dp"/>
+        android:layout_marginLeft="@dimen/activity_margin_left"/>
 
     <TextView
         android:id="@+id/dateTextView"
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/priority_spinner"
+        android:layout_below="@+id/prioritySpinner"
         android:layout_marginTop="10dp"
         android:text="Due Date"
         android:textSize="20sp"

@@ -2,6 +2,7 @@ package com.codepath.simpletodo;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,11 @@ import java.util.ArrayList;
  * Created by akueisara on 9/15/2016.
  */
 public class TodoAdapter extends ArrayAdapter<TodoItem> {
+
+    private Context mContext;
     public TodoAdapter(Context context, ArrayList<TodoItem> items) {
         super(context, 0, items);
+        this.mContext= context;
     }
 
     @Override
@@ -44,11 +48,14 @@ public class TodoAdapter extends ArrayAdapter<TodoItem> {
 
     private int setColor(int priority) {
         if(priority == 1)
-            return Color.RED;
+            // color red
+            return ContextCompat.getColor(mContext, R.color.colorPriorityHigh);
         else if (priority == 2)
-            return Color.argb(255,255,105,0);
+            // color orange
+            return ContextCompat.getColor(mContext, R.color.colorPriorityMid);
         else if(priority == 3)
-            return Color.argb(255,0,128,0);
+            // color green
+            return ContextCompat.getColor(mContext, R.color.colorPriorityLow);
         return -1;
     }
 }

@@ -10,14 +10,17 @@
 
     <item
         android:id="@+id/sort_title"
-        android:title="Sort by title" />
+        android:title="Sort by title"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/sort_priority"
-        android:title="Sort by priority" />
+        android:title="Sort by priority"
+        app:showAsAction="never"/>
 
     <item
         android:id="@+id/sort_date"
-        android:title="Sort by due date" />
+        android:title="Sort by due date"
+        app:showAsAction="never"/>
 
 </menu>

@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/addBodyTextView"
-        android:layout_marginLeft="6dp"
+        android:layout_marginLeft="@dimen/activity_margin_left"
         android:textSize="20sp"
         android:inputType="textCapSentences"/>
 
@@ -74,11 +74,11 @@
         android:textStyle="bold" />
 
     <Spinner
-        android:id="@+id/add_priority_spinner"
+        android:id="@+id/addPrioritySpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/addPriorityTextView"
-        android:layout_marginLeft="6dp"
+        android:layout_marginLeft="@dimen/activity_margin_left"
         android:textSize="20sp" />
 
     <TextView
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/add_priority_spinner"
+        android:layout_below="@+id/addPrioritySpinner"
         android:layout_marginTop="10dp"
         android:text="Due Date"
         android:textSize="20sp"
@@ -98,16 +98,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/addDateTextView"
-        android:layout_marginLeft="6dp"
+        android:layout_marginLeft="@dimen/activity_margin_left"
         android:onClick="onDatePick"
         android:text="2016/09/20"
         android:textSize="20sp" />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/addEditDateTextView"
-        android:layout_centerHorizontal="true">
 
         <Button
             android:id="@+id/AddButton"
@@ -116,16 +110,8 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="16dp"
             android:onClick="onAdd"
+            android:layout_below="@+id/addEditDateTextView"
+            android:layout_centerHorizontal="true"
             android:text="Add" />
-
-        <Button
-            android:id="@+id/CancelButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_toRightOf="@id/AddButton"
-            android:onClick="onCancel"
-            android:text="Cancel" />
-    </RelativeLayout>
 
 </RelativeLayout>

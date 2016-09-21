@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,7 +22,7 @@ import android.widget.Toast;
 public class AddItemActivity extends AppCompatActivity implements EditDialogFragment.EditDialogListener {
     private int priority;
 
-    private static int[] priorityColors = new int[]{
+    private static int[] PRIORITY_COLORS = new int[]{
             R.color.colorPriorityHigh,
             R.color.colorPriorityMid,
             R.color.colorPriorityLow,
@@ -43,7 +46,7 @@ public class AddItemActivity extends AppCompatActivity implements EditDialogFrag
 
         // Priority
         priority = getIntent().getIntExtra("priority", 0);
-        Spinner spinner = (Spinner) findViewById(R.id.add_priority_spinner);
+        Spinner spinner = (Spinner) findViewById(R.id.addPrioritySpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.priority_array, android.R.layout.simple_spinner_item);
@@ -55,7 +58,7 @@ public class AddItemActivity extends AppCompatActivity implements EditDialogFrag
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView)parent.getChildAt(0)).setTextColor(getResources().getColor(priorityColors[position]));
+                ((TextView)parent.getChildAt(0)).setTextColor(ContextCompat.getColor(getApplicationContext(), PRIORITY_COLORS[position]));
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -69,11 +72,26 @@ public class AddItemActivity extends AppCompatActivity implements EditDialogFrag
         dateTextView.setText(date);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_edit, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.escButton) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void onAdd(View v) {
         EditText etTitle = (EditText) findViewById(R.id.addItemTitleEditText);
         EditText etBody = (EditText) findViewById(R.id.addItemBodyEditText);
         TextView tvDate = (TextView) findViewById(R.id.addEditDateTextView);
-        Spinner spinner = (Spinner) findViewById(R.id.add_priority_spinner);
+        Spinner spinner = (Spinner) findViewById(R.id.addPrioritySpinner);
         if (!"".equals(etTitle.getText().toString())) {
             Intent data = new Intent();
             data.putExtra("itemTitle", etTitle.getText().toString());

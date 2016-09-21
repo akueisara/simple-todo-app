@@ -25,14 +25,13 @@ public class MainActivity extends AppCompatActivity {
     TodoAdapter adapter;
     ListView lvItems;
     private final int REQUEST_CODE = 20;
-    private TodoItemDatabase mDbHelper;
+    private TodoItemDatabase dbHelper;
     ArrayList<TodoItem> todoItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         populateItemsList();
         setupListViewListener();
     }
@@ -53,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("priority", 1);
             intent.putExtra("date", getCurrentDateTime());
             startActivityForResult(intent, REQUEST_CODE);
+            return true;
         }
         else if(item.getItemId() == R.id.sort_title) {
             Collections.sort(todoItems, new TodoItemTitleComparator());
@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -85,30 +84,6 @@ public class MainActivity extends AppCompatActivity {
         lvItems = (ListView) findViewById(R.id.lvItems);
         lvItems.setAdapter(adapter);
     }
-
-
-//    public void onAddItem(View view) {
-//        EditText etNewItem = (EditText) findViewById(R.id.btnAddItem);
-//        String itemText = etNewItem.getText().toString();
-//
-//        if (!"".equals(itemText)) {
-//            todoItems.add(new TodoItem(itemText, "", 1, getCurrentDateTime()));
-//            adapter.notifyDataSetChanged();
-//            etNewItem.setText("");
-//            writeItemsToDB();
-//            // Check if no view has focus:
-//            if (view != null) {
-//                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-//            }
-//        } else {
-//            Context context = getApplicationContext();
-//            CharSequence text = "Please enter a valid item name";
-//            int duration = Toast.LENGTH_SHORT;
-//            Toast toast = Toast.makeText(context, text, duration);
-//            toast.show();
-//        }
-//    }
 
     public void setupListViewListener() {
         lvItems.setOnItemLongClickListener(
@@ -162,22 +137,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     private void readItemsFromDB() {
-        mDbHelper = TodoItemDatabase.getInstance(this);
-        todoItems = mDbHelper.getAllItems();
+        dbHelper = TodoItemDatabase.getInstance(this);
+        todoItems = dbHelper.getAllItems();
     }
 
     private void writeItemsToDB() {
-        mDbHelper = TodoItemDatabase.getInstance(this);
-        mDbHelper.addItems(todoItems);
+        dbHelper = TodoItemDatabase.getInstance(this);
+        dbHelper.addItems(todoItems);
     }
 
     private String getCurrentDateTime() {
         // get current date
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
-        String datetime = dateformat.format(c.getTime());
-        return datetime;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        String dateTime = dateFormat.format(c.getTime());
+        return dateTime;
     }
 }
