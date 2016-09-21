@@ -1,7 +1,6 @@
 package com.codepath.simpletodo;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +14,8 @@ import java.util.ArrayList;
  * Created by akueisara on 9/15/2016.
  */
 public class TodoAdapter extends ArrayAdapter<TodoItem> {
-
     private Context mContext;
+
     public TodoAdapter(Context context, ArrayList<TodoItem> items) {
         super(context, 0, items);
         this.mContext= context;
@@ -31,10 +30,10 @@ public class TodoAdapter extends ArrayAdapter<TodoItem> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_todo, parent, false);
         }
         // Lookup view for data population
-        TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
-        TextView tvBody = (TextView) convertView.findViewById(R.id.tvBody);
+        TextView tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
+        TextView tvBody = (TextView) convertView.findViewById(R.id.tv_body);
 //        TextView tvPriority = (TextView) convertView.findViewById(R.id.tvPriority);
-        TextView tvDate = (TextView) convertView.findViewById(R.id.tvDate);
+        TextView tvDate = (TextView) convertView.findViewById(R.id.tv_date);
         // Populate the data into the template view using the data object
         tvTitle.setText(item.title);
         tvTitle.setTextColor(setColor(item.priority));

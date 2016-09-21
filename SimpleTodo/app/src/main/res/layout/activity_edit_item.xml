@@ -10,122 +10,122 @@
     tools:context="com.codepath.simpletodo.EditItemActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/text_view_edit_item_below"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Edit Item Below:"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/edit_item_headline"
         android:textColor="@android:color/black"
-        android:textSize="21sp"
+        android:textSize="@dimen/edit_activity_headline_text_size"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/titleTextView"
+        android:id="@+id/edit_title_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="10dp"
-        android:text="Title"
-        android:textSize="20sp"
+        android:layout_below="@+id/text_view_edit_item_below"
+        android:layout_marginTop="@dimen/edit_activity_vertical_margin"
+        android:text="@string/item_title"
+        android:textSize="@dimen/edit_activity_text_size"
         android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/itemTitleEditText"
+        android:id="@+id/edit_text_edit_item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/titleTextView"
-        android:textSize="20sp"
+        android:layout_below="@+id/edit_title_text_view"
         android:layout_marginLeft="@dimen/activity_margin_left"
-        android:inputType="textCapSentences"/>
+        android:inputType="textCapSentences"
+        android:textSize="@dimen/edit_activity_text_size" />
 
     <TextView
-        android:id="@+id/bodyTextView"
+        android:id="@+id/text_view_edit_body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/itemTitleEditText"
-        android:layout_marginTop="10dp"
-        android:text="Descripition"
-        android:textSize="20sp"
+        android:layout_below="@+id/edit_text_edit_item_title"
+        android:layout_marginTop="@dimen/edit_activity_vertical_margin"
+        android:text="@string/item_body"
+        android:textSize="@dimen/edit_activity_text_size"
         android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/itemBodyEditText"
+        android:id="@+id/edit_text_edit_item_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bodyTextView"
-        android:textSize="20sp"
+        android:layout_below="@+id/text_view_edit_body"
         android:layout_marginLeft="@dimen/activity_margin_left"
-        android:inputType="textCapSentences"/>
+        android:inputType="textCapSentences"
+        android:textSize="@dimen/edit_activity_text_size" />
 
     <TextView
-        android:id="@+id/priorityTextView"
+        android:id="@+id/text_view_edit_priority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/itemBodyEditText"
-        android:layout_marginTop="10dp"
-        android:text="Priority"
-        android:textSize="20sp"
+        android:layout_below="@+id/edit_text_edit_item_body"
+        android:layout_marginTop="@dimen/edit_activity_vertical_margin"
+        android:text="@string/item_priority"
+        android:textSize="@dimen/edit_activity_text_size"
         android:textStyle="bold"/>
 
     <Spinner
-        android:id="@+id/prioritySpinner"
+        android:id="@+id/spinner_edit_priority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/priorityTextView"
-        android:textSize="20sp"
-        android:layout_marginLeft="@dimen/activity_margin_left"/>
+        android:layout_below="@+id/text_view_edit_priority"
+        android:layout_marginLeft="@dimen/activity_margin_left"
+        android:textSize="@dimen/edit_activity_priority_text_size" />
 
     <TextView
-        android:id="@+id/dateTextView"
+        android:id="@+id/text_view_edit_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/prioritySpinner"
-        android:layout_marginTop="10dp"
-        android:text="Due Date"
-        android:textSize="20sp"
+        android:layout_below="@+id/spinner_edit_priority"
+        android:layout_marginTop="@dimen/edit_activity_vertical_margin"
+        android:text="@string/item_date"
+        android:textSize="@dimen/edit_activity_text_size"
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/editDateTextView"
+        android:id="@+id/text_view_dialog_edit_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/dateTextView"
+        android:layout_below="@+id/text_view_edit_date"
         android:onClick="onDatePick"
-        android:layout_marginLeft="6dp"
-        android:text="2016/09/20"
-        android:textSize="20sp" />
+        android:layout_marginLeft="@dimen/activity_margin_left"
+        android:text="@string/item_defualt_date"
+        android:textSize="@dimen/edit_activity_text_size" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editDateTextView"
+        android:layout_below="@+id/text_view_dialog_edit_date"
         android:layout_centerHorizontal="true">
 
         <Button
-            android:id="@+id/saveButton"
+            android:id="@+id/button_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginRight="@dimen/edit_activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:onClick="onSave"
-            android:text="Save" />
+            android:text="@string/button_save" />
 
         <Button
-            android:id="@+id/DeleteButton"
+            android:id="@+id/button_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_toRightOf="@id/saveButton"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_toRightOf="@id/button_save"
             android:onClick="onDelete"
-            android:text="Delete" />
+            android:text="@string/button_delete" />
     </RelativeLayout>
 
 </RelativeLayout>

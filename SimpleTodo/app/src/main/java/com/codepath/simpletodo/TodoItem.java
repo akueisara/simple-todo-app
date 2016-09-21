@@ -1,7 +1,5 @@
 package com.codepath.simpletodo;
 
-import java.util.ArrayList;
-
 /**
  * Created by akueisara on 9/14/2016.
  */

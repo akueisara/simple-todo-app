@@ -19,7 +19,8 @@ import android.widget.Toast;
 /**
  * Created by akueisara on 9/20/2016.
  */
-public class AddItemActivity extends AppCompatActivity implements EditDialogFragment.EditDialogListener {
+
+public class AddItemActivity extends AppCompatActivity implements EditDateDialogFragment.EditDialogListener {
     private int priority;
 
     private static int[] PRIORITY_COLORS = new int[]{
@@ -36,17 +37,17 @@ public class AddItemActivity extends AppCompatActivity implements EditDialogFrag
 
         // Title
         String title = getIntent().getStringExtra("title");
-        EditText titleEditText = (EditText) findViewById(R.id.addItemTitleEditText);
+        EditText titleEditText = (EditText) findViewById(R.id.edit_text_add_item_title);
         titleEditText.setText(title);
 
         // Body
         String body = getIntent().getStringExtra("body");
-        EditText bodyEditText = (EditText) findViewById(R.id.addItemBodyEditText);
+        EditText bodyEditText = (EditText) findViewById(R.id.edit_text_add_item_body);
         bodyEditText.setText(body);
 
         // Priority
         priority = getIntent().getIntExtra("priority", 0);
-        Spinner spinner = (Spinner) findViewById(R.id.addPrioritySpinner);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner_add_priority);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.priority_array, android.R.layout.simple_spinner_item);
@@ -68,7 +69,7 @@ public class AddItemActivity extends AppCompatActivity implements EditDialogFrag
 
         //  Date
         String date = getIntent().getStringExtra("date");
-        TextView dateTextView = (TextView) findViewById(R.id.addEditDateTextView);
+        TextView dateTextView = (TextView) findViewById(R.id.text_view_dialog_add_date);
         dateTextView.setText(date);
     }
 
@@ -80,18 +81,25 @@ public class AddItemActivity extends AppCompatActivity implements EditDialogFrag
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.escButton) {
+        if(item.getItemId() == R.id.button_esc) {
             finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onFinishEditDialog(String date) {
+        TextView tvDate = (TextView) findViewById(R.id.text_view_dialog_add_date);
+        tvDate.setText(date);
+    }
+
     public void onAdd(View v) {
-        EditText etTitle = (EditText) findViewById(R.id.addItemTitleEditText);
-        EditText etBody = (EditText) findViewById(R.id.addItemBodyEditText);
-        TextView tvDate = (TextView) findViewById(R.id.addEditDateTextView);
-        Spinner spinner = (Spinner) findViewById(R.id.addPrioritySpinner);
+        EditText etTitle = (EditText) findViewById(R.id.edit_text_add_item_title);
+        EditText etBody = (EditText) findViewById(R.id.edit_text_add_item_body);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner_add_priority);
+        TextView tvDate = (TextView) findViewById(R.id.text_view_dialog_add_date);
+
         if (!"".equals(etTitle.getText().toString())) {
             Intent data = new Intent();
             data.putExtra("itemTitle", etTitle.getText().toString());
@@ -103,25 +111,19 @@ public class AddItemActivity extends AppCompatActivity implements EditDialogFrag
         }
         else {
             Context context = getApplicationContext();
-            String text = "Please enter a valid item name";
+            String text =  getResources().getString(R.string.message_valid_name);
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
 
             // Reset title
             String title = getIntent().getStringExtra("title");
-            EditText titleEditText = (EditText) findViewById(R.id.addItemTitleEditText);
-            titleEditText.setText(title);
+            etTitle.setText(title);
 
             // Reset body
             String body = getIntent().getStringExtra("body");
-            EditText bodyeditText = (EditText) findViewById(R.id.addItemBodyEditText);
-            bodyeditText.setText(body);
+            etBody.setText(body);
         }
-    }
-
-    public void onCancel(View v) {
-        finish();
     }
 
     public void onDatePick(View view) {
@@ -130,14 +132,8 @@ public class AddItemActivity extends AppCompatActivity implements EditDialogFrag
 
     private void showEditDialog() {
         FragmentManager fm = getSupportFragmentManager();
-        TextView tvDate = (TextView) findViewById(R.id.addEditDateTextView);
-        EditDialogFragment editItemDialog = EditDialogFragment.newInstance(tvDate.getText().toString());
-        editItemDialog.show(fm, "fragment_edit_date");
-    }
-
-    @Override
-    public void onFinishEditDialog(String date) {
-        TextView tvDate = (TextView) findViewById(R.id.addEditDateTextView);
-        tvDate.setText(date);
+        TextView tvDate = (TextView) findViewById(R.id.text_view_dialog_add_date);
+        EditDateDialogFragment editItemDialog = EditDateDialogFragment.newInstance(tvDate.getText().toString());
+        editItemDialog.show(fm, "fragment_edit_date_dialog");
     }
 }

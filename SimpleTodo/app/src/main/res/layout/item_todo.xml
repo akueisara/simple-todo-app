@@ -2,51 +2,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Title"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_title"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <!--<TextView-->
-            <!--android:id="@+id/tvPriority"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Priority"-->
-            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-            <!--android:layout_marginTop="3dp"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--/>-->
+        <!--android:id="@+id/tvPriority"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Priority"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:layout_marginTop="3dp"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--/>-->
 
         <TextView
-            android:id="@+id/tvDate"
+            android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="date"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginTop="3dp"
-            android:layout_alignParentRight="true"/>
-
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/item_todo_date_margin_top"
+            android:text="@string/item_date"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/tvBody"
+            android:id="@+id/tv_body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginTop="6dp"
-            android:layout_below="@id/tvTitle"
-            android:hint="Click to edit description"/>
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="@dimen/activity_margin_top"
+            android:hint="@string/item_todo_hint"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </RelativeLayout>
 </LinearLayout>

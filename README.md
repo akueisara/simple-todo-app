@@ -4,7 +4,7 @@ Simple Todo is an android app that allows building a todo list and basic todo it
 
 Submitted by: Kuei-Jung Hu
 
-Time spent: 13 hours spent in total
+Time spent: 15 hours spent in total
 
 ## User Stories
 
@@ -28,6 +28,7 @@ The following **additional** features are implemented:
 * [x] Add support for sorting items by title, priority or due date
 * [x] Add an alert dialog to confirm delete
 * [x] Add splash screen and design the launcher icon (thanks to the cat Ralph)
+* [x] Add localiaztion for Taiwan
 
 ## Video Walkthrough 
 

@@ -10,108 +10,109 @@
     tools:context="com.codepath.simpletodo.EditItemActivity">
 
     <TextView
-        android:id="@+id/addTextView"
+        android:id="@+id/text_view_add_item_below"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Add Item Below:"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/add_item_headline"
         android:textColor="@android:color/black"
-        android:textSize="21sp"
+        android:textSize="@dimen/edit_activity_headline_text_size"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/addTitleTextView"
+        android:id="@+id/add_title_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/addTextView"
-        android:layout_marginTop="10dp"
-        android:text="Title"
-        android:textSize="20sp"
+        android:layout_below="@+id/text_view_add_item_below"
+        android:layout_marginTop="@dimen/edit_activity_vertical_margin"
+        android:text="@string/item_title"
+        android:textSize="@dimen/edit_activity_text_size"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/addItemTitleEditText"
+        android:id="@+id/edit_text_add_item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/addTitleTextView"
-        android:layout_marginLeft="6dp"
-        android:textSize="20sp"
-        android:inputType="textCapSentences"/>
-
-    <TextView
-        android:id="@+id/addBodyTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/addItemTitleEditText"
-        android:layout_marginTop="10dp"
-        android:text="Descripition"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/addItemBodyEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/addBodyTextView"
+        android:layout_below="@+id/add_title_text_view"
         android:layout_marginLeft="@dimen/activity_margin_left"
-        android:textSize="20sp"
-        android:inputType="textCapSentences"/>
+        android:inputType="textCapSentences"
+        android:textSize="@dimen/edit_activity_text_size" />
 
     <TextView
-        android:id="@+id/addPriorityTextView"
+        android:id="@+id/text_view_add_body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/addItemBodyEditText"
-        android:layout_marginTop="10dp"
-        android:text="Priority"
-        android:textSize="20sp"
+        android:layout_below="@+id/edit_text_add_item_title"
+        android:layout_marginTop="@dimen/edit_activity_vertical_margin"
+        android:text="@string/item_body"
+        android:textSize="@dimen/edit_activity_text_size"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edit_text_add_item_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_view_add_body"
+        android:layout_marginLeft="@dimen/activity_margin_left"
+        android:inputType="textCapSentences"
+        android:textSize="@dimen/edit_activity_text_size" />
+
+    <TextView
+        android:id="@+id/text_view_add_priority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/edit_text_add_item_body"
+        android:layout_marginTop="@dimen/edit_activity_vertical_margin"
+        android:text="@string/item_priority"
+        android:textSize="@dimen/edit_activity_text_size"
         android:textStyle="bold" />
 
     <Spinner
-        android:id="@+id/addPrioritySpinner"
+        android:id="@+id/spinner_add_priority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/addPriorityTextView"
+        android:layout_below="@+id/text_view_add_priority"
         android:layout_marginLeft="@dimen/activity_margin_left"
-        android:textSize="20sp" />
+        android:dropDownWidth="wrap_content"
+        android:textSize="@dimen/edit_activity_priority_text_size" />
 
     <TextView
-        android:id="@+id/addDateTextView"
+        android:id="@+id/text_view_add_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/addPrioritySpinner"
-        android:layout_marginTop="10dp"
-        android:text="Due Date"
-        android:textSize="20sp"
+        android:layout_below="@+id/spinner_add_priority"
+        android:layout_marginTop="@dimen/edit_activity_vertical_margin"
+        android:text="@string/item_date"
+        android:textSize="@dimen/edit_activity_text_size"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/addEditDateTextView"
+        android:id="@+id/text_view_dialog_add_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/addDateTextView"
+        android:layout_below="@+id/text_view_add_date"
         android:layout_marginLeft="@dimen/activity_margin_left"
         android:onClick="onDatePick"
-        android:text="2016/09/20"
-        android:textSize="20sp" />
+        android:text="@string/item_defualt_date"
+        android:textSize="@dimen/edit_activity_text_size" />
 
-        <Button
-            android:id="@+id/AddButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="16dp"
-            android:onClick="onAdd"
-            android:layout_below="@+id/addEditDateTextView"
-            android:layout_centerHorizontal="true"
-            android:text="Add" />
+    <Button
+        android:id="@+id/button_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_view_dialog_add_date"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="@dimen/edit_activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:onClick="onAdd"
+        android:text="@string/button_add" />
 
 </RelativeLayout>

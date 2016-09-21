@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <item
-        android:id="@+id/addButton"
-        android:icon="@drawable/add_button"
+        android:id="@+id/icon_button_add"
+        android:icon="@drawable/btn_add"
         android:title="Add item"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom|withText" />
 
     <item
-        android:id="@+id/sort_title"
-        android:title="Sort by title"
-        app:showAsAction="never" />
+        android:id="@+id/button_sort"
+        android:icon="@drawable/btn_sort"
+        android:title="@string/button_sort"
+        app:showAsAction="always">
+        <menu>
+            <group>
+                <item
+                    android:id="@+id/sort_title"
+                    android:title="@string/sort_title"
+                    app:showAsAction="ifRoom|withText" />
 
-    <item
-        android:id="@+id/sort_priority"
-        android:title="Sort by priority"
-        app:showAsAction="never"/>
+                <item
+                    android:id="@+id/sort_priority"
+                    android:title="@string/sort_priority"
+                    app:showAsAction="ifRoom|withText" />
 
-    <item
-        android:id="@+id/sort_date"
-        android:title="Sort by due date"
-        app:showAsAction="never"/>
-
+                <item
+                    android:id="@+id/sort_date"
+                    android:title="@string/sort_date"
+                    app:showAsAction="ifRoom|withText" />
+            </group>
+        </menu>
+    </item>
 </menu>

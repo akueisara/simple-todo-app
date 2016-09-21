@@ -13,7 +13,6 @@ import android.widget.ImageView;
  * Created by akueisara on 9/20/2016.
  */
 public class WelcomeActivity extends Activity {
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +20,7 @@ public class WelcomeActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.welcome);
+        setContentView(R.layout.activity_welcome);
 
         final ImageView animImageView = (ImageView) findViewById(R.id.iv_animation);
         animImageView.setBackgroundResource(R.drawable.anim);
@@ -41,6 +40,6 @@ public class WelcomeActivity extends Activity {
                 startActivity(intent);
                 WelcomeActivity.this.finish();
             }
-        }, 3500);
+        }, 3000);
     }
 }

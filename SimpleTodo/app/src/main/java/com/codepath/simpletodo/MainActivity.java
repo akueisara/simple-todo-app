@@ -1,20 +1,13 @@
 package com.codepath.simpletodo;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         setupListViewListener();
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -45,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.addButton) {
+        if(item.getItemId() == R.id.icon_button_add) {
             Intent intent = new Intent(MainActivity.this, AddItemActivity.class);
             intent.putExtra("title", "");
             intent.putExtra("body", "");
@@ -54,61 +46,24 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(intent, REQUEST_CODE);
             return true;
         }
-        else if(item.getItemId() == R.id.sort_title) {
+        if(item.getItemId() == R.id.sort_title) {
             Collections.sort(todoItems, new TodoItemTitleComparator());
             adapter.notifyDataSetChanged();
             return true;
         }
-        else if (item.getItemId() == R.id.sort_priority) {
+        if (item.getItemId() == R.id.sort_priority) {
             Collections.sort(todoItems, new TodoItemDateComparator());
             Collections.sort(todoItems, new TodoItemPriorityComparator());
             adapter.notifyDataSetChanged();
             return true;
-
-        } else if (item.getItemId() == R.id.sort_date) {
+        }
+        if (item.getItemId() == R.id.sort_date) {
             Collections.sort(todoItems, new TodoItemPriorityComparator());
             Collections.sort(todoItems, new TodoItemDateComparator());
             adapter.notifyDataSetChanged();
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void populateItemsList() {
-        // Construct the data source
-        todoItems = new ArrayList<TodoItem>();
-        readItemsFromDB();
-        // Create the adapter to convert the array to views
-        adapter = new TodoAdapter(this, todoItems);
-        // Attach the adapter to a ListView
-        lvItems = (ListView) findViewById(R.id.lvItems);
-        lvItems.setAdapter(adapter);
-    }
-
-    public void setupListViewListener() {
-        lvItems.setOnItemLongClickListener(
-                new AdapterView.OnItemLongClickListener() {
-                    @Override
-                    public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id) {
-                        todoItems.remove(pos);
-                        adapter.notifyDataSetChanged();
-                        writeItemsToDB();
-                        return true;
-                    }
-                });
-
-        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int pos, long arg) {
-                Intent intent = new Intent(MainActivity.this, EditItemActivity.class);
-                intent.putExtra("title", todoItems.get(pos).title);
-                intent.putExtra("body", todoItems.get(pos).body);
-                intent.putExtra("priority", todoItems.get(pos).priority);
-                intent.putExtra("date", todoItems.get(pos).dueDate);
-                intent.putExtra("pos", pos);
-                startActivityForResult(intent, REQUEST_CODE);
-            }
-        });
     }
 
     @Override
@@ -135,6 +90,43 @@ public class MainActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
             writeItemsToDB();
         }
+    }
+
+    private void populateItemsList() {
+        // Construct the data source
+        todoItems = new ArrayList<TodoItem>();
+        readItemsFromDB();
+        // Create the adapter to convert the array to views
+        adapter = new TodoAdapter(this, todoItems);
+        // Attach the adapter to a ListView
+        lvItems = (ListView) findViewById(R.id.lvItems);
+        lvItems.setAdapter(adapter);
+    }
+
+    private void setupListViewListener() {
+        lvItems.setOnItemLongClickListener(
+                new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id) {
+                        todoItems.remove(pos);
+                        adapter.notifyDataSetChanged();
+                        writeItemsToDB();
+                        return true;
+                    }
+                });
+
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int pos, long arg) {
+                Intent intent = new Intent(MainActivity.this, EditItemActivity.class);
+                intent.putExtra("title", todoItems.get(pos).title);
+                intent.putExtra("body", todoItems.get(pos).body);
+                intent.putExtra("priority", todoItems.get(pos).priority);
+                intent.putExtra("date", todoItems.get(pos).dueDate);
+                intent.putExtra("pos", pos);
+                startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
     }
 
     private void readItemsFromDB() {

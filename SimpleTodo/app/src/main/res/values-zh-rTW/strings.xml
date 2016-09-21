@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Simple Todo</string>
+    <string name="add_item_headline">新增任務</string>
+    <string name="edit_item_headline">編輯任務</string>
+    <string name="item_title">標題</string>
+    <string name="item_body">描述</string>
+    <string name="item_priority">優先度</string>
+    <string name="item_date">截止日期</string>
+    <string name="item_defualt_date">2016/09/20</string>
+    <string name="item_todo_hint">請點選任務編輯描述</string>
+    <string name="button_add">新增</string>
+    <string name="button_save">儲存</string>
+    <string name="button_delete">刪除</string>
+    <string name="button_ok">確認</string>
+    <string name="button_esc">離開</string>
+    <string name="button_sort">排序</string>
+    <string name="sort_title">依標題排序</string>
+    <string name="sort_priority">依優先度排序</string>
+    <string name="sort_date">依截止日期排序</string>
+    <string name="message_valid_name">請輸入任務標題</string>
+    <string-array name="priority_array">
+        <item>高</item>
+        <item>中等</item>
+        <item>低</item>
+    </string-array>
+    <string name="message_delete_confirm">您確認要刪除嗎?</string>
+    <string name="title_delete_confirm">刪除確認</string>
+
+</resources>

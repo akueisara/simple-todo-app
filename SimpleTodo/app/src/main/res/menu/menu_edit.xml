@@ -2,8 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/escButton"
-        android:icon="@drawable/esc_button"
-        android:title="Esc"
+        android:id="@+id/button_esc"
+        android:icon="@drawable/btn_esc"
+        android:title="@string/button_esc"
         app:showAsAction="always"/>
 </menu>
