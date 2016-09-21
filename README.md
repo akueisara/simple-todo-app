@@ -27,12 +27,13 @@ The following **additional** features are implemented:
 
 * [x] Add support for sorting items by title, priority or due date
 * [x] Add an alert dialog to confirm delete
+* [x] Add splash screen and design the launcher icon (thanks to the cat Ralph)
 
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/f7WnIg3.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/k5S3iMk.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
