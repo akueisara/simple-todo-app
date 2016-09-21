@@ -28,7 +28,7 @@ The following **additional** features are implemented:
 * [x] Add support for sorting items by title, priority or due date
 * [x] Add an alert dialog to confirm delete
 * [x] Add splash screen and design the launcher icon (thanks to the cat Ralph)
-* [x] Add localiaztion for Taiwan
+* [x] Add localization for Taiwan
 
 ## Video Walkthrough 
 
