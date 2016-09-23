@@ -27,6 +27,9 @@
     <string name="edit_task">Edit Task</string>
     <string name="expired_message">Status must be "Expired"</string>
     <string name="unexpired_message">Status must not be "Expired"</string>
+    <string name="todo">Todo</string>
+    <string name="done">Done</string>
+    <string name="expired">Expired</string>
     <string-array name="priority_array">
         <item>High</item>
         <item>Medium</item>

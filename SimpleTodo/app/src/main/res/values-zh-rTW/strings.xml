@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">Simple Todo</string>
     <string name="add_item_headline">新增任務:</string>
     <string name="edit_item_headline">編輯任務:</string>
     <string name="item_title">標題</string>
@@ -37,4 +36,7 @@
         <item>完成</item>
         <item>過期</item>
     </string-array>
+    <string name="done">完成</string>
+    <string name="expired">過期</string>
+    <string name="todo">待完成</string>
 </resources>

@@ -50,7 +50,7 @@ public class EditDateDialogFragment extends DialogFragment {
         String[] splitedDate = dateString.split("/");
 
         int year = Integer.parseInt(splitedDate[0]);
-        int month = Integer.parseInt(splitedDate[1]) - 1;
+        int month = Integer.parseInt(splitedDate[1])-1;
         int day  = Integer.parseInt(splitedDate[2]);
         DatePicker datePicker = (DatePicker) getView().findViewById(R.id.date_picker);
         datePicker.updateDate(year, month, day);
@@ -66,7 +66,26 @@ public class EditDateDialogFragment extends DialogFragment {
     private void dismissDialog(){
         EditDialogListener listener = (EditDialogListener) getActivity();
         DatePicker datePicker = (DatePicker) getView().findViewById(R.id.date_picker);
-        String dateString = datePicker.getYear() + "/" + (datePicker.getMonth()+1) + "/" + (datePicker.getDayOfMonth());
+        int month = datePicker.getMonth()+1;
+        int day = datePicker.getDayOfMonth();
+        String formattedMonth;
+        String formattedDay;
+        if(day < 10)
+        {
+            formattedDay = "0" + day;
+        }
+        else {
+            formattedDay = String.valueOf(day);
+        }
+
+        if(month < 10)
+        {
+            formattedMonth = "0" + month;
+        }
+        else {
+            formattedMonth = String.valueOf(month);
+        }
+        String dateString = datePicker.getYear() + "/" + formattedMonth + "/" + formattedDay;
         listener.onFinishEditDialog(dateString);
         dismiss();
     }

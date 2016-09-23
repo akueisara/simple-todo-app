@@ -1,6 +1,7 @@
 package com.codepath.simpletodo;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
@@ -48,6 +49,16 @@ public class TodoAdapter extends ArrayAdapter<TodoItem> {
         tvTitle.setText(item.title);
         tvTitle.setTextColor(setColor(item.priority));
 
+        tvBody.setText(item.body);
+        tvBody.setTextColor(ContextCompat.getColor(mContext, R.color.colorBody));
+
+        tvDate.setText(item.dueDate);
+
+        if(item.status == 2) {
+            tvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.colorDisable));
+            tvBody.setTextColor(ContextCompat.getColor(mContext, R.color.colorDisable));
+        }
+
         // If item expires, set title color as gray and item priority as low
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         try {
@@ -55,18 +66,17 @@ public class TodoAdapter extends ArrayAdapter<TodoItem> {
 //                SpannableString sp = new SpannableString(item.title);
 //                sp.setSpan(new StrikethroughSpan(), 0, item.title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 //                tvTitle.setText(sp);
-                tvTitle.setTextColor(Color.parseColor("#A0A0A0"));
                 item.status = 3 ;
+                tvStatus.setText(mContext.getResources().getString(R.string.expired));
+                tvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.colorDisable));
+                tvBody.setTextColor(ContextCompat.getColor(mContext, R.color.colorDisable));
+            }
+            else {
+                tvStatus.setText("");
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        tvBody.setText(item.body);
-//        tvPriority.setText(item.getPriority(item.priority));
-//        tvPriority.setTextColor(setColor(item.priority));
-        tvDate.setText(item.dueDate);
-        tvStatus.setText(item.getStatus(item.status));
 
         // Return the completed view to render on screen
         return convertView;

@@ -6,6 +6,8 @@
     <color name="colorPriorityHigh">#FF0000</color>
     <color name="colorPriorityMid">#FF6900</color>
     <color name="colorPriorityLow">#008000</color>
-    <color name="colorStatusExpired">#A0A0A0</color>
-    <color name="colorStatusBlack">#000000</color>
+    <color name="colorExpiredStatus">#992D2D</color>
+    <color name="colorBody">#666666</color>
+    <color name="colorDisable">#A0A0A0</color>
+    <color name="colorBlack">#000000</color>
 </resources>

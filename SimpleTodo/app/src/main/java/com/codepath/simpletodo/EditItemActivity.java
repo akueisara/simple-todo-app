@@ -12,6 +12,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -36,9 +39,9 @@ public class EditItemActivity extends AppCompatActivity implements EditDateDialo
     };
 
     private static int[] STATUS_COLORS = new int[]{
-            R.color.colorStatusBlack,
-            R.color.colorStatusBlack,
-            R.color.colorStatusExpired,
+            R.color.colorBlack,
+            R.color.colorDisable,
+            R.color.colorExpiredStatus,
     };
 
     @Override
@@ -90,12 +93,27 @@ public class EditItemActivity extends AppCompatActivity implements EditDateDialo
         statusSpinner = (Spinner) findViewById(R.id.spinner_edit_status);
         // Create an ArrayAdapter using the string array and a default spinner layout
         statusAdapter = ArrayAdapter.createFromResource(this,
-                R.array.status_array, android.R.layout.simple_spinner_item);
+                R.array.status_array, R.layout.spinner_item);
         // Specify the layout to use when the list of choices appears
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         statusSpinner.setAdapter(statusAdapter);
         statusSpinner.setSelection(status - 1);
+        statusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ((TextView)parent.getChildAt(0)).setTextColor(ContextCompat.getColor(getApplicationContext(), STATUS_COLORS[position]));
+//                ((TextView)parent.getChildAt(0)).setTextSize(getResources().getDimension(R.dimen.edit_activity_priority_text_size));
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        InputMethodManager inputManager = (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     @Override
@@ -111,8 +129,30 @@ public class EditItemActivity extends AppCompatActivity implements EditDateDialo
             return true;
         }
         if(item.getItemId() == R.id.button_refresh) {
-            finish();
-            startActivity(getIntent());
+            // Reset Title
+            String title = getIntent().getStringExtra("title");
+            EditText titleEditText = (EditText) findViewById(R.id.edit_text_edit_item_title);
+            titleEditText.setText(title);
+
+            // Reset Body
+            String body = getIntent().getStringExtra("body");
+            EditText bodyEditText = (EditText) findViewById(R.id.edit_text_edit_item_body);
+            bodyEditText.setText(body);
+
+            // Reset Priority
+            priority = getIntent().getIntExtra("priority", 0);
+            Spinner spinner = (Spinner) findViewById(R.id.spinner_edit_priority);
+            spinner.setSelection(priority-1);
+
+            //  Reset Date
+            String date = getIntent().getStringExtra("date");
+            TextView dateTextView = (TextView) findViewById(R.id.text_view_dialog_edit_date);
+            dateTextView.setText(date);
+
+            // Reset Status
+            status = getIntent().getIntExtra("status", 0);
+            statusSpinner = (Spinner) findViewById(R.id.spinner_edit_status);
+            statusSpinner.setSelection(status - 1);
             return true;
         }
         return super.onOptionsItemSelected(item);

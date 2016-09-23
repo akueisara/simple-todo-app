@@ -2,6 +2,7 @@ package com.codepath.simpletodo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -9,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -37,9 +40,9 @@ public class AddItemActivity extends AppCompatActivity implements EditDateDialog
     };
 
     private static int[] STATUS_COLORS = new int[]{
-            R.color.colorStatusBlack,
-            R.color.colorStatusBlack,
-            R.color.colorStatusExpired,
+            R.color.colorBlack,
+            R.color.colorDisable,
+            R.color.colorExpiredStatus,
     };
 
     @Override
@@ -63,7 +66,7 @@ public class AddItemActivity extends AppCompatActivity implements EditDateDialog
         Spinner spinner = (Spinner) findViewById(R.id.spinner_add_priority);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.priority_array, android.R.layout.simple_spinner_item);
+                R.array.priority_array, R.layout.spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
@@ -90,12 +93,26 @@ public class AddItemActivity extends AppCompatActivity implements EditDateDialog
         statusSpinner = (Spinner) findViewById(R.id.spinner_add_status);
         // Create an ArrayAdapter using the string array and a default spinner layout
         statusAdapter = ArrayAdapter.createFromResource(this,
-                R.array.status_array, android.R.layout.simple_spinner_item);
+                R.array.status_array, R.layout.spinner_item);
         // Specify the layout to use when the list of choices appears
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         statusSpinner.setAdapter(statusAdapter);
         statusSpinner.setSelection(status - 1);
+        statusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ((TextView)parent.getChildAt(0)).setTextColor(ContextCompat.getColor(getApplicationContext(), STATUS_COLORS[position]));
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        InputMethodManager inputManager = (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     @Override
@@ -111,8 +128,30 @@ public class AddItemActivity extends AppCompatActivity implements EditDateDialog
             return true;
         }
         if(item.getItemId() == R.id.button_refresh) {
-            finish();
-            startActivity(getIntent());
+            // Reset Title
+            String title = getIntent().getStringExtra("title");
+            EditText titleEditText = (EditText) findViewById(R.id.edit_text_edit_item_title);
+            titleEditText.setText(title);
+
+            // Reset Body
+            String body = getIntent().getStringExtra("body");
+            EditText bodyEditText = (EditText) findViewById(R.id.edit_text_edit_item_body);
+            bodyEditText.setText(body);
+
+            // Reset Priority
+            priority = getIntent().getIntExtra("priority", 0);
+            Spinner spinner = (Spinner) findViewById(R.id.spinner_edit_priority);
+            spinner.setSelection(priority-1);
+
+            //  Reset Date
+            String date = getIntent().getStringExtra("date");
+            TextView dateTextView = (TextView) findViewById(R.id.text_view_dialog_edit_date);
+            dateTextView.setText(date);
+
+            // Reset Status
+            status = getIntent().getIntExtra("status", 0);
+            statusSpinner = (Spinner) findViewById(R.id.spinner_edit_status);
+            statusSpinner.setSelection(status - 1);
             return true;
         }
         return super.onOptionsItemSelected(item);

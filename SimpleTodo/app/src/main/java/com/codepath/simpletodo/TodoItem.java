@@ -1,5 +1,6 @@
 package com.codepath.simpletodo;
 
+import android.content.res.Resources;
 /**
  * Created by akueisara on 9/14/2016.
  */
@@ -20,13 +21,13 @@ public class TodoItem {
 
     public String getStatus(int status) {
         if(status == 1) {
-            return "TODO";
+            return Resources.getSystem().getString(R.string.todo);
         }
         else if(status == 2) {
-            return "DONE";
+            return Resources.getSystem().getString(R.string.done);
         }
         else if(status == 3) {
-            return "EXPIRED";
+            return Resources.getSystem().getString(R.string.expired);
         }
         return "";
     }
