@@ -156,12 +156,18 @@ public class EditItemActivity extends AppCompatActivity implements EditDateDialo
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+                // Reset status
+                status = getIntent().getIntExtra("status", 0);
+                statusSpinner.setSelection(2);
             } else if (!sdf.parse(tvDate.getText().toString()).before(sdf.parse(getCurrentDateTime())) && statusSpinner.getSelectedItemPosition()+1 == 3) {
                 Context context = getApplicationContext();
                 String text = getResources().getString(R.string.unexpired_message);
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+                // Reset status
+                status = getIntent().getIntExtra("status", 0);
+                statusSpinner.setSelection(status - 1);
             } else {
                 Intent data = new Intent();
                 data.putExtra("itemTitle", etTitle.getText().toString());
