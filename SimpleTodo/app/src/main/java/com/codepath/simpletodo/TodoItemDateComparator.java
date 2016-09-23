@@ -14,7 +14,7 @@ public class TodoItemDateComparator implements Comparator<TodoItem> {
         try {
             if(sdf.parse(one.dueDate).before(sdf.parse(another.dueDate)))
                 return -1;
-            else
+            else if(sdf.parse(one.dueDate).after(sdf.parse(another.dueDate)))
                 return 1;
         } catch (ParseException e) {
             e.printStackTrace();

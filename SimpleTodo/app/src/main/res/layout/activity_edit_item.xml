@@ -100,13 +100,33 @@
         android:layout_below="@+id/text_view_edit_date"
         android:onClick="onDatePick"
         android:layout_marginLeft="@dimen/activity_margin_left"
-        android:text="@string/item_defualt_date"
+        android:text="@string/item_default_date"
         android:textSize="@dimen/edit_activity_text_size" />
+
+    <TextView
+        android:id="@+id/text_view_edit_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/text_view_dialog_edit_date"
+        android:layout_marginTop="@dimen/edit_activity_vertical_margin"
+        android:text="@string/item_status"
+        android:textSize="@dimen/edit_activity_text_size"
+        android:textStyle="bold"/>
+
+    <Spinner
+        android:id="@+id/spinner_edit_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_view_edit_status"
+        android:layout_marginLeft="@dimen/activity_margin_left"
+        android:textSize="@dimen/edit_activity_priority_text_size" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text_view_dialog_edit_date"
+        android:layout_below="@+id/spinner_edit_status"
         android:layout_centerHorizontal="true">
 
         <Button

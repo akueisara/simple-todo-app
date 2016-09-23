@@ -38,10 +38,20 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/tv_body"
+            android:id="@+id/tv_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_title"
+            android:layout_marginTop="@dimen/activity_margin_top"
+            android:hint="@string/item_status"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@android:color/background_dark"/>
+
+        <TextView
+            android:id="@+id/tv_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_status"
             android:layout_marginTop="@dimen/activity_margin_top"
             android:hint="@string/item_todo_hint"
             android:textAppearance="?android:attr/textAppearanceMedium" />

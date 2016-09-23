@@ -6,13 +6,16 @@
     <string name="item_body">Descripition</string>
     <string name="item_priority">Priority</string>
     <string name="item_date">Due Date</string>
-    <string name="item_defualt_date" translatable="false">2016/09/20</string>
+    <string name="item_default_date" translatable="false">2016/09/20</string>
+    <string name="item_status">Status</string>
+    <string name="item_default_status">Todo</string>
     <string name="item_todo_hint">Click to edit description</string>
     <string name="button_add">Add</string>
     <string name="button_save">Save</string>
     <string name="button_delete">Delete</string>
     <string name="button_ok">OK</string>
     <string name="button_esc">Esc</string>
+    <string name="button_refresh">Refresh</string>
     <string name="button_sort">Sort</string>
     <string name="sort_title">Sort By Title</string>
     <string name="sort_priority">Sort By Priority</string>
@@ -20,9 +23,18 @@
     <string name="message_valid_name">Please enter a valid task title</string>
     <string name="title_delete_confirm">Confirm Delete</string>
     <string name="message_delete_confirm">Are you sure to delete it?</string>
+    <string name="add_task">Add Task</string>
+    <string name="edit_task">Edit Task</string>
+    <string name="expired_message">Status must be "Expired"</string>
+    <string name="unexpired_message">Status must not be "Expired"</string>
     <string-array name="priority_array">
         <item>High</item>
         <item>Medium</item>
         <item>Low</item>
+    </string-array>
+    <string-array name="status_array">
+        <item>Todo</item>
+        <item>Done</item>
+        <item>Expired</item>
     </string-array>
 </resources>

@@ -26,6 +26,7 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
     private static final String KEY_TODO_BODY = "body";
     private static final String KEY_TODO_PRIORITY = "priority";
     private static final String KEY_TODO_DUE_DATE = "date";
+    private static final String KEY_TODO_STATUS = "status";
 
     private static final String TAG = TodoItemDatabase.class.getName();
 
@@ -61,7 +62,8 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
                 KEY_TODO_TITLE + " TEXT, " +
                 KEY_TODO_BODY + " TEXT, " +
                 KEY_TODO_PRIORITY + " INTEGER, " +
-                KEY_TODO_DUE_DATE + " TEXT" +
+                KEY_TODO_DUE_DATE + " TEXT, " +
+                KEY_TODO_STATUS + " INTEGER" +
                 ")";
 
         db.execSQL(CREATE_TODO_TABLE);
@@ -98,7 +100,8 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
                     String body = cursor.getString(cursor.getColumnIndex(KEY_TODO_BODY));
                     int priority = cursor.getInt(cursor.getColumnIndex(KEY_TODO_PRIORITY));
                     String dueDate = cursor.getString(cursor.getColumnIndex(KEY_TODO_DUE_DATE));
-                    TodoItem item = new TodoItem(title, body, priority, dueDate);
+                    int status = cursor.getInt(cursor.getColumnIndex(KEY_TODO_STATUS));
+                    TodoItem item = new TodoItem(title, body, priority, dueDate, status);
                     items.add(item);
                     cursor.moveToNext();
                 }
@@ -130,6 +133,7 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
                 values.put(KEY_TODO_BODY, item.body);
                 values.put(KEY_TODO_PRIORITY, item.priority);
                 values.put(KEY_TODO_DUE_DATE, item.dueDate);
+                values.put(KEY_TODO_STATUS, item.status);
                 db.insertOrThrow(TABLE_NAME, null, values);
             }
             db.setTransactionSuccessful();
