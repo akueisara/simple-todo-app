@@ -25,10 +25,12 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
+* [x] Prevent user from adding empty item titles when clicking on add/save in the AddItemActivity/EditItemActivity
 * [x] Add support for sorting items by title, priority or due date
 * [x] Add an alert dialog to confirm delete
 * [x] Add splash screen and design the launcher icon (thanks to the cat Ralph)
 * [x] Add localization for Taiwan
+* [x] Add a refresh button in the AddItemActivity and EditItemActivity
 * [x] Add support for selecting the status of each todo item (and display in listview item)
 
 ## Video Walkthrough 
