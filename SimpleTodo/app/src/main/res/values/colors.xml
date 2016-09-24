@@ -10,4 +10,5 @@
     <color name="colorBody">#666666</color>
     <color name="colorDisable">#A0A0A0</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorDoneStatus">#5E2D79</color>
 </resources>

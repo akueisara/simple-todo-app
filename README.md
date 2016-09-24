@@ -37,7 +37,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/GCjTvHc.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/dlYhi7X.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
@@ -45,7 +45,6 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 * Todo: When the screen is rotated, the activity is killed and restarted. I'm currently trying to avoid that
 * Todo: Need people to use the app and provide feedback
-* Todo: Decide if the title of the item whose status is done should be another color instead of gray after users provide feedback
 
 ## License
 

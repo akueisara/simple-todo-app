@@ -41,7 +41,7 @@ public class AddItemActivity extends AppCompatActivity implements EditDateDialog
 
     private static int[] STATUS_COLORS = new int[]{
             R.color.colorBlack,
-            R.color.colorDisable,
+            R.color.colorDoneStatus,
             R.color.colorExpiredStatus,
     };
 

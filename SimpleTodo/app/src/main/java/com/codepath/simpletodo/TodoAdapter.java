@@ -73,6 +73,10 @@ public class TodoAdapter extends ArrayAdapter<TodoItem> {
             }
             else {
                 tvStatus.setText("");
+                if(item.status == 2) {
+                    tvStatus.setText(mContext.getResources().getString(R.string.done));
+                    tvStatus.setTextColor(ContextCompat.getColor(mContext, R.color.colorDoneStatus));
+                }
             }
         } catch (ParseException e) {
             e.printStackTrace();

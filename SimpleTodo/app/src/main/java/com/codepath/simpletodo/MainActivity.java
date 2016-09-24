@@ -1,8 +1,10 @@
 package com.codepath.simpletodo;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +25,6 @@ import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
     private TodoAdapter adapter, adapter2, adapter3;
-    private TodoByPriorityAdapter priorityAdapter, priorityAdapter2, priorityAdapter3;
     private ListView lvItems, lvItems2, lvItems3;
     private final int REQUEST_CODE = 20;
     private TodoItemDatabase dbHelper;
@@ -140,24 +141,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupListViewListener() {
-//        lvItems.setOnItemLongClickListener(
-//                new AdapterView.OnItemLongClickListener() {
-//                    @Override
-//                    public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id) {
-//                        todoItems.remove(pos);
-//                        if(sortingOption == 2) {
-//                            item_1.remove(pos);
-//                            setAdaptersListViewsForPriorityAndStatus(R.id.sort_priority);
-//                        }
-//                        if(sortingOption == 4) {
-//                            item_1.remove(pos);
-//                            setAdaptersListViewsForPriorityAndStatus(R.id.sort_status);
-//                        }
-//                        adapter.notifyDataSetChanged();
-//                        writeItemsToDB();
-//                        return true;
-//                    }
-//                });
+        lvItems.setOnItemLongClickListener(
+                new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id) {
+                        todoItems.remove(pos);
+                        if(sortingOption == 2) {
+                            item_1.remove(pos);
+                            setAdaptersListViewsForPriorityAndStatus(R.id.sort_priority);
+                        }
+                        if(sortingOption == 4) {
+                            item_1.remove(pos);
+                            setAdaptersListViewsForPriorityAndStatus(R.id.sort_status);
+                        }
+                        adapter.notifyDataSetChanged();
+                        writeItemsToDB();
+                        return true;
+                    }
+                });
 
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -173,20 +174,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        lvItems2.setOnItemLongClickListener(
-//                new AdapterView.OnItemLongClickListener() {
-//                    @Override
-//                    public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id) {
-//                        todoItems.remove(pos + item_1.size());
-//                        item_2.remove(pos);
-//                        if(sortingOption == 2)
-//                            setAdaptersListViewsForPriorityAndStatus(R.id.sort_priority);
-//                        if(sortingOption == 4)
-//                            setAdaptersListViewsForPriorityAndStatus(R.id.sort_status);
-//                        writeItemsToDB();
-//                        return true;
-//                    }
-//                });
+        lvItems2.setOnItemLongClickListener(
+                new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id) {
+                        todoItems.remove(pos + item_1.size());
+                        item_2.remove(pos);
+                        if(sortingOption == 2)
+                            setAdaptersListViewsForPriorityAndStatus(R.id.sort_priority);
+                        if(sortingOption == 4)
+                            setAdaptersListViewsForPriorityAndStatus(R.id.sort_status);
+                        writeItemsToDB();
+                        return true;
+                    }
+                });
 
         lvItems2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -202,20 +203,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        lvItems3.setOnItemLongClickListener(
-//                new AdapterView.OnItemLongClickListener() {
-//                    @Override
-//                    public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id) {
-//                        todoItems.remove(pos + item_1.size()+item_2.size());
-//                        item_3.remove(pos);
-//                        if(sortingOption == 2)
-//                            setAdaptersListViewsForPriorityAndStatus(R.id.sort_priority);
-//                        if(sortingOption == 4)
-//                            setAdaptersListViewsForPriorityAndStatus(R.id.sort_status);
-//                        writeItemsToDB();
-//                        return true;
-//                    }
-//                });
+        lvItems3.setOnItemLongClickListener(
+                new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id) {
+                        todoItems.remove(pos + item_1.size()+item_2.size());
+                        item_3.remove(pos);
+                        if(sortingOption == 2)
+                            setAdaptersListViewsForPriorityAndStatus(R.id.sort_priority);
+                        if(sortingOption == 4)
+                            setAdaptersListViewsForPriorityAndStatus(R.id.sort_status);
+                        writeItemsToDB();
+                        return true;
+                    }
+                });
 
         lvItems3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -352,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
             if(item_2.size() != 0) {
                 sortHeader2.setVisibility(View.VISIBLE);
                 sortHeader2.setText(getResources().getString(R.string.done));
-                sortHeader2.setBackgroundColor(getResources().getColor(R.color.colorDisable));
+                sortHeader2.setBackgroundColor(getResources().getColor(R.color.colorDoneStatus));
             }
             if(item_2.size() == 0) {
                 sortHeader2.setVisibility(View.GONE);
@@ -360,7 +361,7 @@ public class MainActivity extends AppCompatActivity {
             if(item_3.size() != 0) {
                 sortHeader3.setVisibility(View.VISIBLE);
                 sortHeader3.setText(getResources().getString(R.string.expired));
-                sortHeader3.setBackgroundColor(getResources().getColor(R.color.colorDisable));
+                sortHeader3.setBackgroundColor(getResources().getColor(R.color.colorExpiredStatus));
             }
             if(item_3.size() == 0) {
                 sortHeader3.setVisibility(View.GONE);
