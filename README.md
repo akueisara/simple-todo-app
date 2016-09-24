@@ -43,8 +43,9 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-* Todo: The item whose status is done should be another color instead of gray.
-* Todo: When the screen is rotated, the activity is killed and restarted. I'm curently trying to avoid that.
+* Todo: When the screen is rotated, the activity is killed and restarted. I'm currently trying to avoid that
+* Todo: Need people to use the app and provide feedback
+* Todo: Decide if the title of the item whose status is done should be another color instead of gray after users provide feedback
 
 ## License
 
