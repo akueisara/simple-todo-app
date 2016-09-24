@@ -5,7 +5,7 @@
         android:id="@+id/icon_button_add"
         android:icon="@drawable/btn_add"
         android:title="Add item"
-        app:showAsAction="ifRoom|withText" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/button_sort"
@@ -17,17 +17,22 @@
                 <item
                     android:id="@+id/sort_title"
                     android:title="@string/sort_title"
-                    app:showAsAction="ifRoom|withText" />
+                    app:showAsAction="never" />
 
                 <item
                     android:id="@+id/sort_priority"
                     android:title="@string/sort_priority"
-                    app:showAsAction="ifRoom|withText" />
+                    app:showAsAction="never" />
 
                 <item
                     android:id="@+id/sort_date"
                     android:title="@string/sort_date"
-                    app:showAsAction="ifRoom|withText" />
+                    app:showAsAction="never" />
+
+                <item
+                    android:id="@+id/sort_status"
+                    android:title="@string/sort_status"
+                    app:showAsAction="never" />
             </group>
         </menu>
     </item>

@@ -44,6 +44,10 @@ public class EditItemActivity extends AppCompatActivity implements EditDateDialo
             R.color.colorExpiredStatus,
     };
 
+    // Prevent  parent.getChildAt(0) returns null
+    @Override
+    protected void onSaveInstanceState(Bundle outState) { /* do nothing */ }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +107,6 @@ public class EditItemActivity extends AppCompatActivity implements EditDateDialo
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ((TextView)parent.getChildAt(0)).setTextColor(ContextCompat.getColor(getApplicationContext(), STATUS_COLORS[position]));
-//                ((TextView)parent.getChildAt(0)).setTextSize(getResources().getDimension(R.dimen.edit_activity_priority_text_size));
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {

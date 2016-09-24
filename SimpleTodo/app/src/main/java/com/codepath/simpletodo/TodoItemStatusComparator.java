@@ -8,9 +8,6 @@ import java.util.Comparator;
 public class TodoItemStatusComparator implements Comparator<TodoItem> {
     @Override
     public int compare(TodoItem one, TodoItem another) {
-        if(one.status == 3)
-        return another.status - one.status;
-        else
-            return 0;
+        return one.status - another.status;
     }
 }

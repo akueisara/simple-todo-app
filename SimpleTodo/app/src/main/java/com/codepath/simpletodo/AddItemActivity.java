@@ -45,6 +45,10 @@ public class AddItemActivity extends AppCompatActivity implements EditDateDialog
             R.color.colorExpiredStatus,
     };
 
+    // Prevent  parent.getChildAt(0) returns null
+    @Override
+    protected void onSaveInstanceState(Bundle outState) { /* do nothing */ }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +79,7 @@ public class AddItemActivity extends AppCompatActivity implements EditDateDialog
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(ContextCompat.getColor(getApplicationContext(), PRIORITY_COLORS[position]));
+                ((TextView)parent.getChildAt(0)).setTextColor(ContextCompat.getColor(getApplicationContext(), PRIORITY_COLORS[position]));
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -117,7 +121,7 @@ public class AddItemActivity extends AppCompatActivity implements EditDateDialog
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_edit, menu);
+        getMenuInflater().inflate(R.menu.menu_add, menu);
         return true;
     }
 
@@ -125,33 +129,6 @@ public class AddItemActivity extends AppCompatActivity implements EditDateDialog
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.button_esc) {
             finish();
-            return true;
-        }
-        if(item.getItemId() == R.id.button_refresh) {
-            // Reset Title
-            String title = getIntent().getStringExtra("title");
-            EditText titleEditText = (EditText) findViewById(R.id.edit_text_edit_item_title);
-            titleEditText.setText(title);
-
-            // Reset Body
-            String body = getIntent().getStringExtra("body");
-            EditText bodyEditText = (EditText) findViewById(R.id.edit_text_edit_item_body);
-            bodyEditText.setText(body);
-
-            // Reset Priority
-            priority = getIntent().getIntExtra("priority", 0);
-            Spinner spinner = (Spinner) findViewById(R.id.spinner_edit_priority);
-            spinner.setSelection(priority-1);
-
-            //  Reset Date
-            String date = getIntent().getStringExtra("date");
-            TextView dateTextView = (TextView) findViewById(R.id.text_view_dialog_edit_date);
-            dateTextView.setText(date);
-
-            // Reset Status
-            status = getIntent().getIntExtra("status", 0);
-            statusSpinner = (Spinner) findViewById(R.id.spinner_edit_status);
-            statusSpinner.setSelection(status - 1);
             return true;
         }
         return super.onOptionsItemSelected(item);

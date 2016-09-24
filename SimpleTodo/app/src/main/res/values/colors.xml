@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorPriorityHigh">#FF0000</color>
-    <color name="colorPriorityMid">#FF6900</color>
+    <color name="colorPriorityMid">#FFA500</color>
     <color name="colorPriorityLow">#008000</color>
     <color name="colorExpiredStatus">#992D2D</color>
     <color name="colorBody">#666666</color>

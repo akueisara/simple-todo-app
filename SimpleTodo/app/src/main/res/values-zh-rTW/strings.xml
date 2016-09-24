@@ -39,4 +39,8 @@
     <string name="done">完成</string>
     <string name="expired">過期</string>
     <string name="todo">待完成</string>
+    <string name="high">高</string>
+    <string name="low">低</string>
+    <string name="medium">中等</string>
+    <string name="sort_status">依狀態排序</string>
 </resources>

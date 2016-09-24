@@ -4,7 +4,7 @@ Simple Todo is an android app that allows building a todo list and basic todo it
 
 Submitted by: Kuei-Jung Hu
 
-Time spent: 16 hours spent in total
+Time spent: 19 hours spent in total
 
 ## User Stories
 
@@ -26,24 +26,25 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 * [x] Prevent user from adding empty item titles when clicking on add/save in the AddItemActivity/EditItemActivity
-* [x] Add support for sorting items by title, priority or due date
+* [x] Add support for sorting items by title, priority, due date or status
 * [x] Add an alert dialog to confirm delete
 * [x] Add splash screen and design the launcher icon (thanks to the cat Ralph)
 * [x] Add localization for Taiwan
-* [x] Add a refresh button in the AddItemActivity and EditItemActivity
+* [x] Add a refresh button in the EditItemActivity
 * [x] Add support for selecting the status of each todo item (and display in listview item)
 
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/Y9yqeEz.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/GCjTvHc.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+* Todo: The item whose status is done should be another color instead of gray.
+* Todo: When the screen is rotated, the activity is killed and restarted. I'm curently trying to avoid that.
 
 ## License
 
