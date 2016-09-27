@@ -1,4 +1,4 @@
-package com.codepath.simpletodo;
+package com.codepath.simpletodo.models;
 
 import android.content.ContentValues;
 import android.content.Context;

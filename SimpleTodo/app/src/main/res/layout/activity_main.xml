@@ -11,16 +11,16 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.codepath.simpletodo.MainActivity">
+        tools:context=".activities.MainActivity">
 
         <TextView
             android:id="@+id/tv_sort_header"
+            style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="@dimen/header_margin_top"
             android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/black"
             android:visibility="gone" />
 
@@ -33,13 +33,13 @@
 
         <TextView
             android:id="@+id/tv_sort_header2"
+            style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/lvItems"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="@dimen/header_margin_top"
             android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/black"
             android:visibility="gone" />
 
@@ -52,13 +52,13 @@
 
         <TextView
             android:id="@+id/tv_sort_header3"
+            style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/lvItems2"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="@dimen/header_margin_top"
             android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/black"
             android:visibility="gone" />
 

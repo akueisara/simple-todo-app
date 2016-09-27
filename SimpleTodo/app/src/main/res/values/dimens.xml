@@ -11,4 +11,6 @@
     <dimen name="edit_activity_vertical_margin">10dp</dimen>
     <dimen name="edit_activity_horizontal_margin">10dp</dimen>
     <dimen name="item_todo_date_margin_top">3dp</dimen>
+    <dimen name="item_todo_status_margin_top">4dp</dimen>
+    <dimen name="header_margin_top">3dp</dimen>
 </resources>

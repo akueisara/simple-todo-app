@@ -1,17 +1,15 @@
-package com.codepath.simpletodo;
+package com.codepath.simpletodo.adapters;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.StrikethroughSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.codepath.simpletodo.R;
+import com.codepath.simpletodo.models.TodoItem;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,7 +39,6 @@ public class TodoAdapter extends ArrayAdapter<TodoItem> {
         // Lookup view for data population
         TextView tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
         TextView tvBody = (TextView) convertView.findViewById(R.id.tv_body);
-//        TextView tvPriority = (TextView) convertView.findViewById(R.id.tvPriority);
         TextView tvDate = (TextView) convertView.findViewById(R.id.tv_date);
         TextView tvStatus = (TextView) convertView.findViewById(R.id.tv_status);
 
@@ -59,17 +56,14 @@ public class TodoAdapter extends ArrayAdapter<TodoItem> {
             tvBody.setTextColor(ContextCompat.getColor(mContext, R.color.colorDisable));
         }
 
-        // If item expires, set title color as gray and item priority as low
+        // If item expires, set title color as gray
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         try {
             if(sdf.parse(item.dueDate).before(sdf.parse(mCurrentTime))) {
-//                SpannableString sp = new SpannableString(item.title);
-//                sp.setSpan(new StrikethroughSpan(), 0, item.title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//                tvTitle.setText(sp);
-                item.status = 3 ;
-                tvStatus.setText(mContext.getResources().getString(R.string.expired));
                 tvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.colorDisable));
                 tvBody.setTextColor(ContextCompat.getColor(mContext, R.color.colorDisable));
+                item.status = 3 ;
+                tvStatus.setText(mContext.getResources().getString(R.string.expired));
             }
             else {
                 tvStatus.setText("");
@@ -81,7 +75,6 @@ public class TodoAdapter extends ArrayAdapter<TodoItem> {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         // Return the completed view to render on screen
         return convertView;
     }

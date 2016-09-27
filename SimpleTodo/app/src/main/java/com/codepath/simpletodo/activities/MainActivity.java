@@ -1,22 +1,25 @@
-package com.codepath.simpletodo;
+package com.codepath.simpletodo.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.codepath.simpletodo.R;
+import com.codepath.simpletodo.adapters.TodoAdapter;
+import com.codepath.simpletodo.models.TodoItem;
+import com.codepath.simpletodo.models.TodoItemDatabase;
+import com.codepath.simpletodo.utils.TodoItemDateComparator;
+import com.codepath.simpletodo.utils.TodoItemPriorityComparator;
+import com.codepath.simpletodo.utils.TodoItemStatusComparator;
+import com.codepath.simpletodo.utils.TodoItemTitleComparator;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -61,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         if(item.getItemId() == R.id.sort_title) {
             Collections.sort(todoItems, new TodoItemTitleComparator());
             setAdaptersListViewsForTitleAndDate();
-//            adapter.notifyDataSetChanged();
             sortingOption = 1;
             writeItemsToDB();
             return true;
@@ -78,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
             Collections.sort(todoItems, new TodoItemPriorityComparator());
             Collections.sort(todoItems, new TodoItemDateComparator());
             setAdaptersListViewsForTitleAndDate();
-//            adapter.notifyDataSetChanged();
             sortingOption = 3;
             writeItemsToDB();
             return true;

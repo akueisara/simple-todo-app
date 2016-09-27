@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/icon_button_add"
-        android:icon="@drawable/btn_add"
-        android:title="Add item"
-        app:showAsAction="always" />
 
     <item
         android:id="@+id/button_sort"
@@ -36,4 +31,12 @@
             </group>
         </menu>
     </item>
+
+    <item
+        android:id="@+id/icon_button_add"
+        android:icon="@drawable/btn_add"
+        android:title="Add item"
+        app:showAsAction="always" />
+
+
 </menu>

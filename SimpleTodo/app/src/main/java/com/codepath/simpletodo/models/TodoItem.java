@@ -1,6 +1,9 @@
-package com.codepath.simpletodo;
+package com.codepath.simpletodo.models;
 
 import android.content.res.Resources;
+
+import com.codepath.simpletodo.R;
+
 /**
  * Created by akueisara on 9/14/2016.
  */

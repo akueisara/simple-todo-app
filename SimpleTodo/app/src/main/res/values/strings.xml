@@ -5,7 +5,8 @@
     <string name="item_title">Title</string>
     <string name="item_body">Descripition</string>
     <string name="item_priority">Priority</string>
-    <string name="item_date">Due Date</string>
+    <string name="item_date">Date</string>
+    <string name="item_due_date">Due Date</string>
     <string name="item_default_date" translatable="false">2016/09/20</string>
     <string name="item_status">Status</string>
     <string name="item_default_status">Todo</string>

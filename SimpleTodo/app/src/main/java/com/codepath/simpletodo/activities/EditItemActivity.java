@@ -1,12 +1,13 @@
-package com.codepath.simpletodo;
+package com.codepath.simpletodo.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,15 +20,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codepath.simpletodo.fragments.EditDateDialogFragment;
+import com.codepath.simpletodo.R;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-/**
- * Created by akueisara on 9/20/2016.
- */
-
-public class AddItemActivity extends AppCompatActivity implements EditDateDialogFragment.EditDialogListener {
+public class EditItemActivity extends AppCompatActivity implements EditDateDialogFragment.EditDialogListener {
     private int priority;
     private int status;
     private Spinner statusSpinner;
@@ -52,22 +52,22 @@ public class AddItemActivity extends AppCompatActivity implements EditDateDialog
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_item);
-        setTitle(getResources().getString(R.string.add_task));
+        setContentView(R.layout.activity_edit_item);
+        setTitle(getResources().getString(R.string.edit_task));
 
         // Title
         String title = getIntent().getStringExtra("title");
-        EditText titleEditText = (EditText) findViewById(R.id.edit_text_add_item_title);
+        EditText titleEditText = (EditText) findViewById(R.id.edit_text_edit_item_title);
         titleEditText.setText(title);
 
         // Body
         String body = getIntent().getStringExtra("body");
-        EditText bodyEditText = (EditText) findViewById(R.id.edit_text_add_item_body);
+        EditText bodyEditText = (EditText) findViewById(R.id.edit_text_edit_item_body);
         bodyEditText.setText(body);
 
         // Priority
         priority = getIntent().getIntExtra("priority", 0);
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_add_priority);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner_edit_priority);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.priority_array, R.layout.spinner_item);
@@ -89,12 +89,12 @@ public class AddItemActivity extends AppCompatActivity implements EditDateDialog
 
         //  Date
         String date = getIntent().getStringExtra("date");
-        TextView dateTextView = (TextView) findViewById(R.id.text_view_dialog_add_date);
+        TextView dateTextView = (TextView) findViewById(R.id.text_view_dialog_edit_date);
         dateTextView.setText(date);
 
         // Status
         status = getIntent().getIntExtra("status", 0);
-        statusSpinner = (Spinner) findViewById(R.id.spinner_add_status);
+        statusSpinner = (Spinner) findViewById(R.id.spinner_edit_status);
         // Create an ArrayAdapter using the string array and a default spinner layout
         statusAdapter = ArrayAdapter.createFromResource(this,
                 R.array.status_array, R.layout.spinner_item);
@@ -121,7 +121,7 @@ public class AddItemActivity extends AppCompatActivity implements EditDateDialog
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_add, menu);
+        getMenuInflater().inflate(R.menu.menu_edit, menu);
         return true;
     }
 
@@ -131,12 +131,39 @@ public class AddItemActivity extends AppCompatActivity implements EditDateDialog
             finish();
             return true;
         }
+        if(item.getItemId() == R.id.button_refresh) {
+            // Reset Title
+            String title = getIntent().getStringExtra("title");
+            EditText titleEditText = (EditText) findViewById(R.id.edit_text_edit_item_title);
+            titleEditText.setText(title);
+
+            // Reset Body
+            String body = getIntent().getStringExtra("body");
+            EditText bodyEditText = (EditText) findViewById(R.id.edit_text_edit_item_body);
+            bodyEditText.setText(body);
+
+            // Reset Priority
+            priority = getIntent().getIntExtra("priority", 0);
+            Spinner spinner = (Spinner) findViewById(R.id.spinner_edit_priority);
+            spinner.setSelection(priority-1);
+
+            //  Reset Date
+            String date = getIntent().getStringExtra("date");
+            TextView dateTextView = (TextView) findViewById(R.id.text_view_dialog_edit_date);
+            dateTextView.setText(date);
+
+            // Reset Status
+            status = getIntent().getIntExtra("status", 0);
+            statusSpinner = (Spinner) findViewById(R.id.spinner_edit_status);
+            statusSpinner.setSelection(status - 1);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onFinishEditDialog(String date) {
-        TextView tvDate = (TextView) findViewById(R.id.text_view_dialog_add_date);
+        TextView tvDate = (TextView) findViewById(R.id.text_view_dialog_edit_date);
         tvDate.setText(date);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         try {
@@ -149,12 +176,11 @@ public class AddItemActivity extends AppCompatActivity implements EditDateDialog
         }
     }
 
-    public void onAdd(View v) {
-        EditText etTitle = (EditText) findViewById(R.id.edit_text_add_item_title);
-        EditText etBody = (EditText) findViewById(R.id.edit_text_add_item_body);
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_add_priority);
-        TextView tvDate = (TextView) findViewById(R.id.text_view_dialog_add_date);
-        Spinner statusSpinner = (Spinner) findViewById(R.id.spinner_add_status);
+    public void onSave(View v) {
+        EditText etTitle = (EditText) findViewById(R.id.edit_text_edit_item_title);
+        EditText etBody = (EditText) findViewById(R.id.edit_text_edit_item_body);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner_edit_priority);
+        TextView tvDate = (TextView) findViewById(R.id.text_view_dialog_edit_date);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         try {
             if ("".equals(etTitle.getText().toString())) {
@@ -174,7 +200,7 @@ public class AddItemActivity extends AppCompatActivity implements EditDateDialog
                 toast.show();
                 // Reset status
                 status = getIntent().getIntExtra("status", 0);
-                statusSpinner.setSelection(status - 1);
+                statusSpinner.setSelection(2);
             } else if (!sdf.parse(tvDate.getText().toString()).before(sdf.parse(getCurrentDateTime())) && statusSpinner.getSelectedItemPosition()+1 == 3) {
                 Context context = getApplicationContext();
                 String text = getResources().getString(R.string.unexpired_message);
@@ -191,6 +217,8 @@ public class AddItemActivity extends AppCompatActivity implements EditDateDialog
                 data.putExtra("itemPriority", spinner.getSelectedItemPosition() + 1);
                 data.putExtra("itemDate", tvDate.getText().toString());
                 data.putExtra("itemStatus", statusSpinner.getSelectedItemPosition() + 1);
+                int pos = getIntent().getIntExtra("pos", 0);
+                data.putExtra("pos", pos);
                 setResult(RESULT_OK, data);
                 finish();
             }
@@ -199,13 +227,29 @@ public class AddItemActivity extends AppCompatActivity implements EditDateDialog
         }
     }
 
+    public void onDelete(View v) {
+        new AlertDialog.Builder(this)
+                .setTitle(getResources().getString(R.string.title_delete_confirm))
+                .setMessage(getResources().getString(R.string.message_delete_confirm))
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Intent data = new Intent();
+                        int pos = getIntent().getIntExtra("pos", 0);
+                        data.putExtra("pos", pos);
+                        setResult(RESULT_OK, data);
+                        finish();
+                    }})
+                .setNegativeButton(android.R.string.no, null).show();
+    }
+
     public void onDatePick(View view) {
         showEditDialog();
     }
 
     private void showEditDialog() {
         FragmentManager fm = getSupportFragmentManager();
-        TextView tvDate = (TextView) findViewById(R.id.text_view_dialog_add_date);
+        TextView tvDate = (TextView) findViewById(R.id.text_view_dialog_edit_date);
         EditDateDialogFragment editItemDialog = EditDateDialogFragment.newInstance(tvDate.getText().toString());
         editItemDialog.show(fm, "fragment_edit_date_dialog");
     }

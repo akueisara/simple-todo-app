@@ -18,45 +18,36 @@
             android:text="@string/item_title"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <!--<TextView-->
-        <!--android:id="@+id/tvPriority"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Priority"-->
-        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-        <!--android:layout_marginTop="3dp"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--/>-->
-
         <TextView
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/item_todo_date_margin_top"
             android:layout_marginLeft="@dimen/activity_margin_left"
+            android:layout_marginTop="@dimen/item_todo_date_margin_top"
             android:text="@string/item_date"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black"
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/tv_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_todo_status_margin_top"
             android:layout_toLeftOf="@id/tv_date"
-            android:layout_marginTop="@dimen/activity_margin_top"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/colorExpiredStatus"/>
+            android:textColor="@color/colorExpiredStatus" />
 
         <TextView
             android:id="@+id/tv_body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:layout_below="@id/tv_status"
             android:layout_marginTop="@dimen/activity_margin_top"
             android:hint="@string/item_todo_hint"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/colorBody"/>
+            android:textColor="@color/colorBody" />
 
     </RelativeLayout>
 </LinearLayout>

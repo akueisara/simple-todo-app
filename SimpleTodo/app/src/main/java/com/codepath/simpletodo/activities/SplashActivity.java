@@ -1,4 +1,4 @@
-package com.codepath.simpletodo;
+package com.codepath.simpletodo.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,10 +9,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.codepath.simpletodo.R;
+
 /**
  * Created by akueisara on 9/20/2016.
  */
-public class WelcomeActivity extends Activity {
+public class SplashActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +22,7 @@ public class WelcomeActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_welcome);
+        setContentView(R.layout.activity_splash);
 
         final ImageView animImageView = (ImageView) findViewById(R.id.iv_animation);
         animImageView.setBackgroundResource(R.drawable.anim);
@@ -36,9 +38,9 @@ public class WelcomeActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(intent);
-                WelcomeActivity.this.finish();
+                SplashActivity.this.finish();
             }
         }, 3000);
     }

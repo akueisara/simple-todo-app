@@ -1,4 +1,6 @@
-package com.codepath.simpletodo;
+package com.codepath.simpletodo.utils;
+
+import com.codepath.simpletodo.models.TodoItem;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
