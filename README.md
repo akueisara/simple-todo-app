@@ -4,7 +4,7 @@ Simple Todo is an android app that allows building a todo list and basic todo it
 
 Submitted by: Kuei-Jung Hu
 
-Time spent: 19 hours spent in total
+Time spent: 21 hours spent in total
 
 ## User Stories
 
@@ -26,7 +26,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 * [x] Prevent user from adding empty item titles when clicking on add/save in the AddItemActivity/EditItemActivity
-* [x] Add support for sorting items by title, priority, due date or status
+* [x] Add support for sorting items by title, priority, due date or status and persist the sorting option into SQLite 
 * [x] Add an alert dialog to confirm delete
 * [x] Add splash screen and design the launcher icon (thanks to the cat Ralph)
 * [x] Add localization for Taiwan
@@ -37,7 +37,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/dlYhi7X.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/iR7d3wH.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 

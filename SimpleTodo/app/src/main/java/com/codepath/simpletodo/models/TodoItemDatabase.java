@@ -18,7 +18,8 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Table Names
-    private static final String TABLE_NAME = "todoList";
+    private static final String TODO_TABLE_NAME = "todoList";
+    private static final String SORT_TABLE_NAME = "todoSort";
 
     // todoList Table columns
     private static final String KEY_TODO_ID = "id";
@@ -27,6 +28,8 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
     private static final String KEY_TODO_PRIORITY = "priority";
     private static final String KEY_TODO_DUE_DATE = "date";
     private static final String KEY_TODO_STATUS = "status";
+    private static final String KEY_SORT_ID = "id";
+    private static final String KEY_SORT_OPTION = "option";
 
     private static final String TAG = TodoItemDatabase.class.getName();
 
@@ -56,7 +59,7 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_TODO_TABLE = "CREATE TABLE " + TABLE_NAME +
+        String CREATE_TODO_TABLE = "CREATE TABLE " + TODO_TABLE_NAME +
                 "(" +
                 KEY_TODO_ID + " INTEGER PRIMARY KEY, " + // Define a primary key
                 KEY_TODO_TITLE + " TEXT, " +
@@ -67,6 +70,14 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
                 ")";
 
         db.execSQL(CREATE_TODO_TABLE);
+
+        String CREATE_SORT_TABLE = "CREATE TABLE " + SORT_TABLE_NAME +
+                "(" +
+                KEY_SORT_ID + " INTEGER PRIMARY KEY, " + // Define a primary key
+                KEY_SORT_OPTION + " INTEGER " +
+                ")";
+
+        db.execSQL(CREATE_SORT_TABLE);
     }
 
     // Called when the database needs to be upgraded.
@@ -76,7 +87,8 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion != newVersion) {
             // Simplest implementation is to drop all old tables and recreate them
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + TODO_TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + SORT_TABLE_NAME);
             onCreate(db);
         }
     }
@@ -85,7 +97,7 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
         ArrayList<TodoItem> items = new ArrayList<TodoItem>();
 
         // SELECT * FROM todoList
-        String ITEMS_SELECT_QUERY = "SELECT * FROM " + TABLE_NAME;
+        String ITEMS_SELECT_QUERY = "SELECT * FROM " + TODO_TABLE_NAME;
 
         // "getReadableDatabase()" and "getWriteableDatabase()" return the same object (except under low
         // disk space scenarios)
@@ -125,7 +137,7 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
         // consistency of the database.
         db.beginTransaction();
         //  db.execSQL("delete from "+ TABLE_NAME);
-        db.delete(TABLE_NAME, null, null);
+        db.delete(TODO_TABLE_NAME, null, null);
         try {
             ContentValues values = new ContentValues();
             for (TodoItem item : items) {
@@ -134,8 +146,56 @@ public class TodoItemDatabase extends SQLiteOpenHelper {
                 values.put(KEY_TODO_PRIORITY, item.priority);
                 values.put(KEY_TODO_DUE_DATE, item.dueDate);
                 values.put(KEY_TODO_STATUS, item.status);
-                db.insertOrThrow(TABLE_NAME, null, values);
+                db.insertOrThrow(TODO_TABLE_NAME, null, values);
             }
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to add or update user");
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+    public int getOption() {
+        // SELECT * FROM todoSortOption
+        String ITEMS_SELECT_QUERY = "SELECT * FROM " + SORT_TABLE_NAME;
+        // "getReadableDatabase()" and "getWriteableDatabase()" return the same object (except under low
+        // disk space scenarios)
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(ITEMS_SELECT_QUERY, null);
+        int option = 0;
+        try {
+            int rows_num = cursor.getCount();
+            if (rows_num != 0) {
+                cursor.moveToFirst();
+                for (int i = 0; i < rows_num; i++) {
+                    option = cursor.getInt(cursor.getColumnIndex(KEY_SORT_OPTION));
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to get items from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+        return option;
+    }
+
+    // Insert a item in the database
+    public void updateOption(int option) {
+        // The database connection is cached so it's not expensive to call getWriteableDatabase() multiple times.
+        SQLiteDatabase db = getWritableDatabase();
+
+        // It's a good idea to wrap our insert in a transaction. This helps with performance and ensures
+        // consistency of the database.
+        db.beginTransaction();
+        db.delete(SORT_TABLE_NAME, null, null);
+        try {
+            ContentValues values = new ContentValues();
+            values.put(KEY_SORT_OPTION, option);
+            db.insertOrThrow(SORT_TABLE_NAME, null, values);
             db.setTransactionSuccessful();
         } catch (Exception e) {
             Log.d(TAG, "Error while trying to add or update user");

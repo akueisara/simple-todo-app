@@ -35,7 +35,7 @@
     <item
         android:id="@+id/icon_button_add"
         android:icon="@drawable/btn_add"
-        android:title="Add item"
+        android:title="@string/button_add"
         app:showAsAction="always" />
 
 
