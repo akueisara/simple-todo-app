@@ -29,7 +29,7 @@ The following **additional** features are implemented:
 * [x] Add support for sorting items by title, priority, due date or status and persist the sorting option into SQLite 
 * [x] Add an alert dialog to confirm delete
 * [x] Add splash screen and design the launcher icon (thanks to the cat Ralph)
-* [x] Add localization for Taiwan
+* [x] Add localization for Traditional Chinese (Taiwan)
 * [x] Add a refresh button in the EditItemActivity
 * [x] Add support for selecting the status of each todo item (and display in listview item)
 
@@ -38,6 +38,10 @@ The following **additional** features are implemented:
 Here's a walkthrough of implemented user stories:
 
 <img src='http://i.imgur.com/KgHNHhK.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+Localization for Traditional Chinese (Taiwan)
+
+<img src='http://i.imgur.com/OFRxxHO.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
